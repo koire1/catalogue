@@ -21,8 +21,8 @@ public class SpecialiteService {
         return specialite.findSpecialiteByNomSpecialite(nomSpecialite);
     }
     
-    public Specialite editSpecialite(Specialite special){
-        Specialite existingSpecialite=specialite.findById(special.getIdSpecialite()).orElse(null);
+    public Specialite editSpecialite(Specialite special, int idSpecialite){
+        Specialite existingSpecialite=specialite.findById(idSpecialite).orElse(null);
                    existingSpecialite.setNomSpecialite(special.getNomSpecialite());
         return specialite.save(existingSpecialite);
     }

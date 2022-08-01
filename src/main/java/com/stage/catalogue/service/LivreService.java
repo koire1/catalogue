@@ -3,8 +3,9 @@ package com.stage.catalogue.service;
 import com.stage.catalogue.dao.LivreDao;
 import com.stage.catalogue.entity.Langue;
 import com.stage.catalogue.entity.Livre;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 /**
  *
@@ -23,28 +24,36 @@ public class LivreService {
         return livre.findLivreByIsbn(isbn);
     }
     
-    public List<Livre> getLivreByTitre(String titre){
-        return livre.findLivreByTitre(titre);
+    public Page<Livre> getLivreByTitre(String titre, Pageable pageable){
+        return livre.findLivreByTitre(titre, pageable);
     }
     
     public Livre getLivreByCote(String cote){
         return livre.findLivreByCote(cote);
     }
     
-    public List<Livre> getLivreByAnneePub(String anneepub){
-        return livre.findLivreByAnneePub(anneepub);
+    public Page<Livre> getLivreByAnneePub(String anneepub, Pageable pageable){
+        return livre.findLivreByAnneePub(anneepub, pageable);
     }
     
-    public List<Livre> getLivreByMaisonEdit(String maisonEdit){
-        return livre.findLivreByMaisonEdit(maisonEdit);
+    public Page<Livre> getLivreByMaisonEdit(String maisonEdit, Pageable pageable){
+        return livre.findLivreByMaisonEdit(maisonEdit, pageable);
     }
     
-    public List<Livre> getLivreByTitreAndLangue(String titre, Langue langue){
-        return livre.findLivreByTitreAndLangue(titre, langue);
+    public Page<Livre> getLivreByTitreAndLangue(String titre, Langue langue, Pageable pageable){
+        return livre.findLivreByTitreAndLangue(titre, langue, pageable);
     }
     
-    public Livre editLivre(Livre liv){
-        Livre existingLivre=livre.findById(liv.getIdLivre()).orElse(null);
+    public Page<Livre> getLivreByIdAuteur(AuteurService auteur, int idAuteur){
+        return livre.findLivreByIdAuteur(auteur, idAuteur);
+    }
+    
+    public Page<Livre> findAll(Pageable pageable){
+        return livre.findAll(pageable);
+    }
+    
+    public Livre editLivreById(Livre liv, int idLivre){
+        Livre existingLivre=livre.findById(idLivre).orElse(null);
               existingLivre.setAnneePub(liv.getAnneePub());
               existingLivre.setCote(liv.getCote());
               existingLivre.setIsbn(liv.getIsbn());
@@ -54,5 +63,9 @@ public class LivreService {
               existingLivre.setImage(liv.getImage());
               existingLivre.setNbrePage(liv.getNbrePage());
         return livre.save(existingLivre);
+    }
+    
+    public void dropLivreById(int idLivre){
+        livre.deleteById(idLivre);
     }
 }

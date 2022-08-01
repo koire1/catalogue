@@ -27,11 +27,19 @@ public class EtudiantService {
         return etudiant.findEtudiantByMatricule(matricule);
     }
     
-    public Etudiant editEtudiant(Etudiant etud){
-        Etudiant existingEtudiant = etudiant.findById(etud.getIdEtudiant()).orElse(null);
+    public List<Etudiant> getAllEtudiant(){
+        return etudiant.findAll();
+    }
+    
+    public Etudiant editEtudiantById(Etudiant etud, int idEtudiant){
+        Etudiant existingEtudiant = etudiant.findById(idEtudiant).orElse(null);
                  existingEtudiant.setMatricule(etud.getMatricule());
                  existingEtudiant.setNomEtudiant(etud.getNomEtudiant());
                  existingEtudiant.setPrenomEtudiant(etud.getPrenomEtudiant());
         return etudiant.save(etud);
+    }
+    
+    public void dropEtudiantById(int idEtudiant){
+        etudiant.deleteById(idEtudiant);
     }
 }

@@ -4,7 +4,8 @@ import com.stage.catalogue.entity.Langue;
 import org.springframework.stereotype.Repository;
 
 import com.stage.catalogue.entity.Livre;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 /**
  *
@@ -13,9 +14,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Repository
 public interface LivreDao extends JpaRepository<Livre, Integer>{
     public Livre findLivreByIsbn(String isbn);
-    public List<Livre> findLivreByTitre(String titre);
+    public Page<Livre> findLivreByTitre(String titre, Pageable pageable);
     public Livre findLivreByCote(String cote);
-    public List<Livre> findLivreByAnneePub(String anneePub);
-    public List<Livre> findLivreByMaisonEdit(String maisonEdit);
-    public List<Livre> findLivreByTitreAndLangue(String titre, Langue langue);
+    public Page<Livre> findLivreByAnneePub(String anneePub, Pageable pageable);
+    public Page<Livre> findLivreByMaisonEdit(String maisonEdit, Pageable pageable);
+    public Page<Livre> findLivreByTitreAndLangue(String titre, Langue langue, Pageable pageable);
+    public Page<Livre> findLivreByIdAuteur(AuteurDao auteur, int idAuteur);
 }

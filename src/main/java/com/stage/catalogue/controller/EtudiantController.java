@@ -5,41 +5,52 @@ import com.stage.catalogue.service.EtudiantService;
 import java.util.List;
 import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 /**
  *
  * @author cellule
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/app")
+@RequestMapping("/etudiant")
 
 public class EtudiantController {
 
     @Autowired
     private EtudiantService etudiant;
     
-    @RequestMapping(value = "/ajoutEtudiant", method = RequestMethod.POST)
+    @PostMapping()
     public Etudiant addEtudiant(@RequestBody Etudiant etud){
         return etudiant.addEtudiant(etud);
     }
     
-    @RequestMapping(value = "/listEtudiant/{matricule}", method = RequestMethod.GET)
+    @GetMapping(value = "/matricule")
     public Etudiant getEtudiantByMatricule(@PathParam("matricule") String matricule){
         return etudiant.getEtudiantByMatricule(matricule);
     }
     
-    @RequestMapping(value = "/listEtudiant/{nometudiant}", method = RequestMethod.GET)
+    @GetMapping(value = "/nometudiant")
     public List<Etudiant> getEtudiantByNomEtudiant(@PathParam("nomEtudiant") String nomEtudiant){
         return etudiant.getEtudiantByNom(nomEtudiant);
     }
     
-    @RequestMapping(value = "modifEtudiant", method = RequestMethod.GET)
-    public Etudiant updateEtudiant(@RequestBody Etudiant etud){
-        return etudiant.editEtudiant(etud);
+    @GetMapping(value = "/all")
+    public List<Etudiant> getAllEtudiant(){
+        return etudiant.getAllEtudiant();
+    }
+    
+    @PutMapping(value = "/edit")
+    public Etudiant updateEtudiant(@RequestBody Etudiant etud, int idEtudiant){
+        return etudiant.editEtudiantById(etud, idEtudiant);
+    }
+    
+    @DeleteMapping(value = "/delete")
+    public void dropEtudiantById(@PathParam("idEtudiant") int idEtudiant){
+        etudiant.dropEtudiantById(idEtudiant);
     }
 }

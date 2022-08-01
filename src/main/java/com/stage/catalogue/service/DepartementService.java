@@ -18,13 +18,22 @@ public class DepartementService {
         return departement.save(depart);
     }
     
-    public List<Departement> getDepartement(String nomDepart){
+    public Departement getDepartementByNomDepart(String nomDepart){
         return departement.findDepartementByNomDepart(nomDepart);
     }
     
-    public Departement editDepartement(Departement depart){
-        Departement existingDepartement=departement.findById(depart.getIdDepart()).orElse(null);
+    public List<Departement> getAllDepartement(){
+        return departement.findAll();
+    }
+    
+    public Departement editDepartement(Departement depart, int idDepart){
+        Departement existingDepartement=departement.findById(idDepart).orElse(null);
                     existingDepartement.setNomDepart(depart.getNomDepart());
         return departement.save(existingDepartement);
     }
+    
+    public void dropDepartementByIdDepart(int idDepart){
+        departement.deleteById(idDepart);
+    }
+    
 }

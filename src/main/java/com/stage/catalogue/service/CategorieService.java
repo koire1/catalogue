@@ -18,13 +18,21 @@ public class CategorieService {
         return categorie.save(cat);
     }
     
-    public List<Categorie> getCategorie(String nomCategorie){
+    public Categorie getCategorieByNom(String nomCategorie){
         return categorie.findCategorieByNomCategorie(nomCategorie);
     }
     
-    public Categorie editCategorie(Categorie cat){
-        Categorie existingCategorie=categorie.findById(cat.getIdCategorie()).orElse(null);
+    public List<Categorie> getAllCategorie(){
+        return categorie.findAll();
+    }
+    
+    public Categorie editCategorieById(Categorie cat, int idCategorie){
+        Categorie existingCategorie=categorie.findById(idCategorie).orElse(null);
                   existingCategorie.setNomCategorie(cat.getNomCategorie());
         return categorie.save(existingCategorie);
+    }
+    
+    public void dropCategorieById(int idCategorie){
+        categorie.deleteById(idCategorie);
     }
 }
