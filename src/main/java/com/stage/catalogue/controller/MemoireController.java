@@ -58,8 +58,8 @@ public class MemoireController {
     }
     
     @PutMapping(value = "/edit")
-    public Memoire updateMemoire(@RequestBody Memoire memo, @PathParam("idMemoire") int idMemoire){
-        return memoire.editMemoire(memo, idMemoire);
+    public Memoire updateMemoireById(@RequestBody Memoire memo, @PathParam("idMemoire") int idMemoire){
+        return memoire.editMemoireById(memo, idMemoire);
     }
     
     @DeleteMapping(value = "/delete")

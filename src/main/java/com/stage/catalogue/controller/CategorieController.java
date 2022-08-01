@@ -29,6 +29,11 @@ public class CategorieController {
         return categorie.addCategorie(cat);
     }
     
+    @GetMapping(value = "/id")
+    public Categorie getCategorieById(@PathParam("idCategorie") int idCategorie){
+        return categorie.getCategorieById(idCategorie);
+    }
+    
     @GetMapping(value = "/nomCategorie")
     public Categorie getCategorieByNom(@PathParam("nomCategorie") String nomCategorie){
         return categorie.getCategorieByNom(nomCategorie);

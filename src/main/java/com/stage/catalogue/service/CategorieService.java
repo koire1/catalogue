@@ -22,6 +22,10 @@ public class CategorieService {
         return categorie.findCategorieByNomCategorie(nomCategorie);
     }
     
+    public Categorie getCategorieById(int idCategorie){
+        return categorie.findCategorieByIdCategorie(idCategorie);
+    }
+    
     public List<Categorie> getAllCategorie(){
         return categorie.findAll();
     }

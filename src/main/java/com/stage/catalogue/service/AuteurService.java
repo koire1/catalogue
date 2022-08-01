@@ -19,12 +19,16 @@ public class AuteurService {
         return auteur.save(aut);
     }
     
-    public Auteur getAuteurByIdAuteur(int idAuteur){
+    public Auteur getAuteurById(int idAuteur){
         return auteur.findAuteurByIdAuteur(idAuteur);
     }
     
     public List<Auteur> getAuteur(){
         return auteur.findAll();
+    }
+    
+    public Auteur getAuteurByNom(String nomAuteur){
+        return auteur.findAuteurByNomAuteur(nomAuteur);
     }
     public Auteur editAuteur(Auteur aut, int idAuteur){
         Auteur existingAuteur=auteur.findById(idAuteur).orElse(null);

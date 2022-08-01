@@ -36,7 +36,7 @@ public class MemoireService {
         return memoire.findMemoireByCycle(cycle, pageable);
     }
     
-    public Memoire editMemoire(Memoire memo, int idMemoire){
+    public Memoire editMemoireById(Memoire memo, int idMemoire){
         Memoire existingMemoire=memoire.findById(idMemoire).orElse(null);
                 existingMemoire.setAnneeValid(memo.getAnneeValid());
                 existingMemoire.setCycle(memo.getCycle());

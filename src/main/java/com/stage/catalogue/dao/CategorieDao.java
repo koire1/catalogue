@@ -11,4 +11,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Repository
 public interface CategorieDao extends JpaRepository<Categorie, Integer>{
     public Categorie findCategorieByNomCategorie(String nomCategorie);
+    public Categorie findCategorieByIdCategorie(Integer idCategorie);
 }

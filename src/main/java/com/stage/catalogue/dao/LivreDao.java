@@ -19,5 +19,4 @@ public interface LivreDao extends JpaRepository<Livre, Integer>{
     public Page<Livre> findLivreByAnneePub(String anneePub, Pageable pageable);
     public Page<Livre> findLivreByMaisonEdit(String maisonEdit, Pageable pageable);
     public Page<Livre> findLivreByTitreAndLangue(String titre, Langue langue, Pageable pageable);
-    public Page<Livre> findLivreByIdAuteur(AuteurDao auteur, int idAuteur);
 }

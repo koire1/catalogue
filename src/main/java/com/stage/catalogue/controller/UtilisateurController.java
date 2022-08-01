@@ -6,34 +6,40 @@ import com.stage.catalogue.service.UtilisateurService;
 import java.util.List;
 import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 /**
  *
  * @author cellule
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/app")
+@RequestMapping("/utilisateur")
 public class UtilisateurController {
     
     @Autowired
     private UtilisateurService utilisateur;
     
-    @RequestMapping(value = "/ajoutUtilisateur", method = RequestMethod.POST)
+    @GetMapping()
     public Utilisateur addUtilisateur(@RequestBody Utilisateur util){
         return utilisateur.addUtilisateur(util);
     }
     
-    @RequestMapping(value = "/listUtilisateur{roleutilisateur}", method = RequestMethod.GET)
+    @GetMapping(value = "/roleutilisateur")
     public List<Utilisateur> getUtilisateurByRole(@PathParam("roleUtilisateur") Role roleUtilisateur){
         return utilisateur.getUtilisateurByRole(roleUtilisateur);
     }
     
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @GetMapping(value = "/all")
+    public List<Utilisateur> getAll(){
+        return utilisateur.findAll();
+    }
+    
+    @PostMapping(value = "/login")
     public Utilisateur loginUtilisateur(@RequestBody Utilisateur util)
     throws Exception{
         
@@ -50,8 +56,13 @@ public class UtilisateurController {
            return utilObject;
     }
     
-    @RequestMapping(value = "/modifUilisateur", method = RequestMethod.GET)
+    @PutMapping(value = "/edit")
     public Utilisateur updateUtilisateur(@RequestBody Utilisateur util){
         return utilisateur.editUtilisateur(util);
+    }
+    
+    @DeleteMapping(value = "/delete")
+    public void dropUtilisateurById(@PathParam("idUtilisateur") int idUtilisateur){
+        utilisateur.deleteById(idUtilisateur);
     }
 }

@@ -2,6 +2,7 @@ package com.stage.catalogue.service;
 
 import com.stage.catalogue.dao.SpecialiteDao;
 import com.stage.catalogue.entity.Specialite;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 /**
@@ -21,9 +22,20 @@ public class SpecialiteService {
         return specialite.findSpecialiteByNomSpecialite(nomSpecialite);
     }
     
-    public Specialite editSpecialite(Specialite special, int idSpecialite){
+    public Specialite getSpecialiteById(int idSpecialite){
+        return specialite.findSpecialiteByIdSpecialite(idSpecialite);
+    }
+    
+    public List<Specialite> findAll(){
+        return specialite.findAll();
+    }
+    public Specialite editSpecialiteById(Specialite special, int idSpecialite){
         Specialite existingSpecialite=specialite.findById(idSpecialite).orElse(null);
                    existingSpecialite.setNomSpecialite(special.getNomSpecialite());
         return specialite.save(existingSpecialite);
+    }
+    
+    public void deleteSpecialiteById(int idSpecialite){
+        specialite.deleteById(idSpecialite);
     }
 }

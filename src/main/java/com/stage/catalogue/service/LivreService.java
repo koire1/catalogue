@@ -44,10 +44,6 @@ public class LivreService {
         return livre.findLivreByTitreAndLangue(titre, langue, pageable);
     }
     
-    public Page<Livre> getLivreByIdAuteur(AuteurService auteur, int idAuteur){
-        return livre.findLivreByIdAuteur(auteur, idAuteur);
-    }
-    
     public Page<Livre> findAll(Pageable pageable){
         return livre.findAll(pageable);
     }

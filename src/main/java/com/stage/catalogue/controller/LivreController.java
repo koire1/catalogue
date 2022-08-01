@@ -2,7 +2,6 @@ package com.stage.catalogue.controller;
 
 import com.stage.catalogue.entity.Langue;
 import com.stage.catalogue.entity.Livre;
-import com.stage.catalogue.service.AuteurService;
 import com.stage.catalogue.service.LivreService;
 import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +27,6 @@ public class LivreController {
 
     @Autowired
     private LivreService livre;
-    private AuteurService auteur;
-    private int idAuteur = auteur.getIdAuteur();
     
     @PostMapping()
     public Livre addLivre(@RequestBody Livre liv){
@@ -76,10 +73,6 @@ public class LivreController {
         return livre.findAll(pageable);
     }
     
-    @GetMapping(value = "/livreAuteur")
-    public Page<Livre> getLivreByIdAuteur(@PathParam("idAuteur") int idAuteur){
-        
-    }
     @PutMapping(value = "/edit")
     public Livre updateLivreById(@RequestBody Livre liv, @PathParam("idLivre") int idLivre){
         return livre.editLivreById(liv, idLivre);

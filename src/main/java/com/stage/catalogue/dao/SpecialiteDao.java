@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SpecialiteDao extends JpaRepository<Specialite, Integer>{
     public Specialite findSpecialiteByNomSpecialite(String nomSpecialite);
+    public Specialite findSpecialiteByIdSpecialite(int idSpecialite);
 }

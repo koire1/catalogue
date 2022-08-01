@@ -30,7 +30,12 @@ public class AuteurController {
     
     @GetMapping(value = "/id")
     public Auteur getAuteurById(@PathParam("idAuteur") int idAuteur){
-        return auteur.getAuteurByIdAuteur(idAuteur);
+        return auteur.getAuteurById(idAuteur);
+    }
+    
+    @GetMapping(value = "/nomauteur")
+    public Auteur getAuteurByNom(@PathParam("nomAuteur") String nomAuteur){
+        return auteur.getAuteurByNom(nomAuteur);
     }
     
     @GetMapping(value = "/all")

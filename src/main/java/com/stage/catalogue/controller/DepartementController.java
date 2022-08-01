@@ -30,8 +30,13 @@ public class DepartementController {
     }
     
     @GetMapping(value = "/nom")
-    public Departement getDepartementByNomDepart(@PathParam("nomDepart") String nomDepart){
-        return departement.getDepartementByNomDepart(nomDepart);
+    public Departement getDepartementByNom(@PathParam("nomDepart") String nomDepart){
+        return departement.getDepartementByNom(nomDepart);
+    }
+    
+    @GetMapping(value = "/id")
+    public Departement getDepartementById(@PathParam("idDepart") int idDepart){
+        return departement.getDepartementById(idDepart);
     }
     
     @GetMapping(value = "/all")
@@ -46,6 +51,6 @@ public class DepartementController {
     
     @DeleteMapping(value = "/delete")
     public void dropDepartementById(@PathParam("idDepart") int idDepart){
-        departement.dropDepartementByIdDepart(idDepart);
+        departement.dropDepartementById(idDepart);
     }
 }

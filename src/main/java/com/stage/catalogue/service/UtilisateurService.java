@@ -28,10 +28,18 @@ public class UtilisateurService {
         return utilisateur.findUtilisateurByRoleUtilisateur(roleUtilisateur);
     }
     
+    public List<Utilisateur> findAll(){
+        return utilisateur.findAll();
+        
+    }
     public Utilisateur editUtilisateur(Utilisateur util){
         Utilisateur existingUtilisateur = utilisateur.findById(util.getIdUtilisateur()).orElse(null);
                     existingUtilisateur.setLogin(util.getLogin());
                     existingUtilisateur.setPassword(util.getPassword());
         return utilisateur.save(existingUtilisateur);
+    }
+    
+    public void deleteById(int idUtilisateur){
+        utilisateur.deleteById(idUtilisateur);
     }
 }

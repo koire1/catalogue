@@ -18,7 +18,11 @@ public class DepartementService {
         return departement.save(depart);
     }
     
-    public Departement getDepartementByNomDepart(String nomDepart){
+    public Departement getDepartementById(int idDepart){
+        return departement.findDepartementByIdDepart(idDepart);
+    }
+    
+    public Departement getDepartementByNom(String nomDepart){
         return departement.findDepartementByNomDepart(nomDepart);
     }
     
@@ -32,7 +36,7 @@ public class DepartementService {
         return departement.save(existingDepartement);
     }
     
-    public void dropDepartementByIdDepart(int idDepart){
+    public void dropDepartementById(int idDepart){
         departement.deleteById(idDepart);
     }
     

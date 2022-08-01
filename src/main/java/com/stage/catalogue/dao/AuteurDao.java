@@ -11,4 +11,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AuteurDao extends JpaRepository<Auteur, Integer>{
     public Auteur findAuteurByIdAuteur(int idAuteur);
+    public Auteur findAuteurByNomAuteur(String nomAuteur);
 }

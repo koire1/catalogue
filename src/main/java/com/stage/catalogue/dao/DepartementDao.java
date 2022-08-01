@@ -11,4 +11,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Repository
 public interface DepartementDao extends JpaRepository<Departement, Integer>{
     public Departement findDepartementByNomDepart(String nomDepart);
+        public Departement findDepartementByIdDepart(int idDepart);
 }
