@@ -29,12 +29,12 @@ public class CategorieController {
         return categorie.addCategorie(cat);
     }
     
-    @GetMapping(value = "/id")
+    @GetMapping(value = "/{id}")
     public Categorie getCategorieById(@PathParam("idCategorie") int idCategorie){
         return categorie.getCategorieById(idCategorie);
     }
     
-    @GetMapping(value = "/nomCategorie")
+    @GetMapping(value = "/{nomCategorie}")
     public Categorie getCategorieByNom(@PathParam("nomCategorie") String nomCategorie){
         return categorie.getCategorieByNom(nomCategorie);
     }
@@ -44,12 +44,12 @@ public class CategorieController {
         return categorie.getAllCategorie();
     }
     
-    @PutMapping(value = "/edit")
+    @PutMapping(value = "/edit/{id}")
     public Categorie updateCategorie(@RequestBody Categorie cat, int idCategorie){
         return categorie.editCategorieById(cat, idCategorie);
     }
     
-    @DeleteMapping(value = "/delete")
+    @DeleteMapping(value = "/delete/{id}")
     public void dropCategorie(int idCategorie){
         categorie.dropCategorieById(idCategorie);
     }

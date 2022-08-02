@@ -29,12 +29,12 @@ public class EtudiantController {
         return etudiant.addEtudiant(etud);
     }
     
-    @GetMapping(value = "/matricule")
+    @GetMapping(value = "/{matricule}")
     public Etudiant getEtudiantByMatricule(@PathParam("matricule") String matricule){
         return etudiant.getEtudiantByMatricule(matricule);
     }
     
-    @GetMapping(value = "/nometudiant")
+    @GetMapping(value = "/{nometudiant}")
     public List<Etudiant> getEtudiantByNomEtudiant(@PathParam("nomEtudiant") String nomEtudiant){
         return etudiant.getEtudiantByNom(nomEtudiant);
     }
@@ -44,12 +44,12 @@ public class EtudiantController {
         return etudiant.getAllEtudiant();
     }
     
-    @PutMapping(value = "/edit")
+    @PutMapping(value = "/edit/{id}")
     public Etudiant updateEtudiant(@RequestBody Etudiant etud, int idEtudiant){
         return etudiant.editEtudiantById(etud, idEtudiant);
     }
     
-    @DeleteMapping(value = "/delete")
+    @DeleteMapping(value = "/delete/{id}")
     public void dropEtudiantById(@PathParam("idEtudiant") int idEtudiant){
         etudiant.dropEtudiantById(idEtudiant);
     }

@@ -29,12 +29,12 @@ public class SpecialiteController {
         return specialite.addSpecialite(special);
     }
     
-    @GetMapping(value = "/nomSpecialite")
+    @GetMapping(value = "/{nomSpecialite}")
     public Specialite getSpecialiteByNomSpecialite(@PathParam("nomSpecialite") String nomSpecialite){
         return specialite.getSpecialiteByNomSpecialite(nomSpecialite);
     }
     
-    @GetMapping(value = "/id")
+    @GetMapping(value = "/{id}")
     public Specialite getSpecialiteById(@PathParam("idSpecilaite") int idSpecialite){
         return specialite.getSpecialiteById(idSpecialite);
     }
@@ -44,12 +44,12 @@ public class SpecialiteController {
         return specialite.findAll();
     }
     
-    @PutMapping(value = "/edit")
+    @PutMapping(value = "/edit/{id}")
     public Specialite updateSpecialite(@RequestBody Specialite special, @PathParam("idSpecialite") int idSpecialite){
         return specialite.editSpecialiteById(special, idSpecialite);
     }
     
-    @DeleteMapping(value = "/delete")
+    @DeleteMapping(value = "/delete/{id}")
     public void deleteSpecialiteById(@PathParam("idSpecialite") int idSpecialite){
         specialite.deleteSpecialiteById(idSpecialite);
     }

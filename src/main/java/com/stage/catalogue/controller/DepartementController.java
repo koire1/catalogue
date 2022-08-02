@@ -29,12 +29,12 @@ public class DepartementController {
         return departement.addDepartement(depart);
     }
     
-    @GetMapping(value = "/nom")
+    @GetMapping(value = "/{nom}")
     public Departement getDepartementByNom(@PathParam("nomDepart") String nomDepart){
         return departement.getDepartementByNom(nomDepart);
     }
     
-    @GetMapping(value = "/id")
+    @GetMapping(value = "/{id}")
     public Departement getDepartementById(@PathParam("idDepart") int idDepart){
         return departement.getDepartementById(idDepart);
     }
@@ -44,12 +44,12 @@ public class DepartementController {
         return departement.getAllDepartement();
     }
     
-    @PutMapping(value = "/edit")
+    @PutMapping(value = "/edit/{id}")
     public Departement updateDepartementById(@RequestBody Departement depart, @PathParam("idDepart") int idDepart){
         return departement.editDepartement(depart, idDepart);
     }
     
-    @DeleteMapping(value = "/delete")
+    @DeleteMapping(value = "/delete/{id}")
     public void dropDepartementById(@PathParam("idDepart") int idDepart){
         departement.dropDepartementById(idDepart);
     }

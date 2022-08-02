@@ -20,6 +20,10 @@ public class MemoireService {
         return memoire.save(memo);
     }
     
+    public Page<Memoire> findAll(Pageable pageable){
+        return memoire.findAll(pageable);
+    }
+    
     public Page<Memoire> getMemoireByAnneeValid(String anneeValid, Pageable pageable){
         return memoire.findMemoireByAnneeValid(anneeValid, pageable);
     }

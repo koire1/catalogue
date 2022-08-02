@@ -28,12 +28,12 @@ public class AuteurController {
         return auteur.addAuteur(aut);
     }
     
-    @GetMapping(value = "/id")
+    @GetMapping(value = "/{id}")
     public Auteur getAuteurById(@PathParam("idAuteur") int idAuteur){
         return auteur.getAuteurById(idAuteur);
     }
     
-    @GetMapping(value = "/nomauteur")
+    @GetMapping(value = "/{nomauteur}")
     public Auteur getAuteurByNom(@PathParam("nomAuteur") String nomAuteur){
         return auteur.getAuteurByNom(nomAuteur);
     }
@@ -43,12 +43,12 @@ public class AuteurController {
         return auteur.getAuteur();
     }
     
-    @GetMapping(value = "/edit")
+    @GetMapping(value = "/edit/{id}")
     public Auteur updateAuteur(@RequestBody Auteur aut, @PathParam("idAuteur") int idAuteur){
         return auteur.editAuteur(aut, idAuteur);
     }
     
-    @DeleteMapping(value = "/delete")
+    @DeleteMapping(value = "/delete/{id}")
     public void dropAuteur(@PathParam("idAuteur") int idAuteur){
         auteur.dropAuteurById(idAuteur);
     }

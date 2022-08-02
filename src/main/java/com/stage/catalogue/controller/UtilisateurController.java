@@ -29,7 +29,7 @@ public class UtilisateurController {
         return utilisateur.addUtilisateur(util);
     }
     
-    @GetMapping(value = "/roleutilisateur")
+    @GetMapping(value = "/{roleutilisateur}")
     public List<Utilisateur> getUtilisateurByRole(@PathParam("roleUtilisateur") Role roleUtilisateur){
         return utilisateur.getUtilisateurByRole(roleUtilisateur);
     }
@@ -56,12 +56,12 @@ public class UtilisateurController {
            return utilObject;
     }
     
-    @PutMapping(value = "/edit")
+    @PutMapping(value = "/edit/{id}")
     public Utilisateur updateUtilisateur(@RequestBody Utilisateur util){
         return utilisateur.editUtilisateur(util);
     }
     
-    @DeleteMapping(value = "/delete")
+    @DeleteMapping(value = "/delete/{id}")
     public void dropUtilisateurById(@PathParam("idUtilisateur") int idUtilisateur){
         utilisateur.deleteById(idUtilisateur);
     }

@@ -44,6 +44,10 @@ public class LivreService {
         return livre.findLivreByTitreAndLangue(titre, langue, pageable);
     }
     
+    public Page<Livre> getLivreByTitreAndLangue(Langue langue, Pageable pageable){
+        return livre.findLivreByLangue(langue);
+    }
+    
     public Page<Livre> findAll(Pageable pageable){
         return livre.findAll(pageable);
     }
