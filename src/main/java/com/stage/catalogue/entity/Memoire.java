@@ -1,6 +1,7 @@
 package com.stage.catalogue.entity;
 
 import java.io.Serializable;
+import java.sql.Date;
 import javax.persistence.*;
 import lombok.Data;
 
@@ -12,11 +13,12 @@ import lombok.Data;
 @Data
 public class Memoire implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idMemoire;
     
-    @Column(name = "anneevalid", nullable = false)
-    private String anneeValid;
+    @Column(nullable = false)
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date anneeValid;
     
     @Column(name = "lientelecharge", nullable = false)
     private String lienTelecharge;

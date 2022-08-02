@@ -5,9 +5,9 @@ import com.stage.catalogue.entity.Livre;
 import com.stage.catalogue.service.LivreService;
 import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,62 +29,56 @@ public class LivreController {
     private LivreService livre;
     
     @PostMapping()
-    public Livre addLivre(@RequestBody Livre liv){
+    public ResponseEntity<Livre> addLivre(@RequestBody Livre liv){
         return livre.addLivre(liv);
     }
     
-    @GetMapping(value = "/{isbn}")
-    public Livre getLivreByIsbn(@PathParam("isbn") String isbn){
+    @GetMapping()
+    public ResponseEntity<Livre> getLivreByIsbn(@PathParam("isbn") String isbn){
         return livre.getLivreByIsbn(isbn);
     }
     
-    @GetMapping(value = "/{titre}")
-    public Page<Livre> getLivreByTitre(@PathParam("titre") String titre, @RequestParam("page") int page, @RequestParam("size") int size){
-        Pageable pageable = PageRequest.of(page, size);
-        return livre.getLivreByTitre(titre, pageable);
+    @GetMapping()
+    public Page<Livre> getLivreByTitre(@PathParam("titre") String titre, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
+        return livre.getLivreByTitre(titre, page, size);
     }
     
-    @GetMapping(value = "/{cote}")
-    public Livre getLivreByCote(@PathParam("cote") String cote){
+    @GetMapping()
+    public ResponseEntity<Livre> getLivreByCote(@PathParam("cote") String cote){
         return livre.getLivreByCote(cote);
     }
     
-    @GetMapping(value = "/{anneepub}")
-    public Page<Livre> getLivreByAnneePub(@PathParam("anneepub") String anneepub, @RequestParam("page") int page, @RequestParam("size") int size){
-        Pageable pageable = PageRequest.of(page, size);
-        return livre.getLivreByAnneePub(anneepub, pageable);
+    @GetMapping()
+    public Page<Livre> getLivreByAnneePub(@PathParam("anneepub") String anneepub, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
+        return livre.getLivreByAnneePub(anneepub, page, size);
     }
     
-    @GetMapping(value = "/{maisonedit}")
-    public Page<Livre> getLivreByMaisonEdit(@PathParam("maisonedit") String maisonedit, @RequestParam("page") int page, @RequestParam("size") int size){
-        Pageable pageable = PageRequest.of(page, size);
-        return livre.getLivreByMaisonEdit(maisonedit, pageable);
+    @GetMapping()
+    public Page<Livre> getLivreByMaisonEdit(@PathParam("maisonedit") String maisonedit, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
+        return livre.getLivreByMaisonEdit(maisonedit, page, size);
     }
     
-    @GetMapping(value = "/{titre}&&{langue}")
-    public Page<Livre> getLivreByTitreAndLangue(@PathParam("titre") String titre, @PathParam("langue") Langue langue, @RequestParam("page") int page, @RequestParam("size") int size){
-        Pageable pageable = PageRequest.of(page, size);
-        return livre.getLivreByTitreAndLangue(titre, langue, pageable);
+    @GetMapping()
+    public Page<Livre> getLivreByTitreAndLangue(@PathParam("titre") String titre, @PathParam("langue") Langue langue, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
+        return livre.getLivreByTitreAndLangue(titre, langue, page, size);
     }
     
-    @GetMapping(value = "/{langue}")
-    public Page<Livre> getLivreByLangue(@PathParam("langue") Langue langue, @RequestParam("page") int page, @RequestParam("size") int size){
-        Pageable pageable = PageRequest.of(page, size);
-        return livre.getLivreByTitreAndLangue(langue, pageable);
+    @GetMapping()
+    public Page<Livre> getLivreByLangue(@PathParam("langue") Langue langue, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
+        return livre.getLivreByLangue(langue, page, size);
     }
     
     @GetMapping(value = "/all")
-    public Page<Livre> getAllLivre(@RequestParam("page") int page, @RequestParam("size") int size){
-        Pageable pageable = PageRequest.of(page, size);
-        return livre.findAll(pageable);
+    public Page<Livre> getAllLivre(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
+        return livre.findAll(page, size);
     }
     
-    @PutMapping(value = "/edit/{id}")
-    public Livre updateLivreById(@RequestBody Livre liv, @PathParam("idLivre") int idLivre){
+    @PutMapping(value = "/edit")
+    public ResponseEntity<Livre> updateLivreById(Livre liv, @PathParam("idLivre") int idLivre){
         return livre.editLivreById(liv, idLivre);
     }
     
-    @DeleteMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/delete/{id: \\id+}")
     public void dropLivreById(@PathParam("idLivre") int idLivre){
         livre.dropLivreById(idLivre);
     }

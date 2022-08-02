@@ -3,9 +3,13 @@ package com.stage.catalogue.service;
 import com.stage.catalogue.dao.UtilisateurDao;
 import com.stage.catalogue.entity.Role;
 import com.stage.catalogue.entity.Utilisateur;
-import java.util.List;
+import java.net.URI;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 /**
  *
  * @author cellule
@@ -16,27 +20,36 @@ public class UtilisateurService {
     @Autowired
     public UtilisateurDao utilisateur;
     
-    public Utilisateur addUtilisateur(Utilisateur util){
-        return utilisateur.save(util);
+    public ResponseEntity<Utilisateur> addUtilisateur(Utilisateur util){
+        Utilisateur ut = utilisateur.save(util);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                       .path("/{id}")
+                       .buildAndExpand(ut.getIdUtilisateur())
+                       .toUri();
+        return ResponseEntity.created(location).body(ut);
     }
     
-    public Utilisateur getUtilisateurByLoginAndPasswordAndRoleUtilisateur(String login, String password, Role roleUtilisateur){
-        return utilisateur.findUtilisateurByLoginAndPasswordAndRoleUtilisateur(login, password, roleUtilisateur);
+    public Utilisateur getUtilisateurByLoginAndPassword(String login, String password){
+        return utilisateur.findUtilisateurByLoginAndPassword(login, password);
     }
     
-    public List<Utilisateur> getUtilisateurByRole(Role roleUtilisateur){
-        return utilisateur.findUtilisateurByRoleUtilisateur(roleUtilisateur);
+    public Page<Utilisateur> getUtilisateurByRole(Role roleUtilisateur, int page, int size){
+        return utilisateur.findUtilisateurByRoleUtilisateur(roleUtilisateur, PageRequest.of(page, size));
     }
     
-    public List<Utilisateur> findAll(){
-        return utilisateur.findAll();
+    public Page<Utilisateur> findAll(int page, int size){
+        return utilisateur.findAll(PageRequest.of(page, size));
         
     }
-    public Utilisateur editUtilisateur(Utilisateur util){
-        Utilisateur existingUtilisateur = utilisateur.findById(util.getIdUtilisateur()).orElse(null);
-                    existingUtilisateur.setLogin(util.getLogin());
-                    existingUtilisateur.setPassword(util.getPassword());
-        return utilisateur.save(existingUtilisateur);
+    public ResponseEntity<Utilisateur> editUtilisateur(Utilisateur util, int idUtilisateur){
+        return utilisateur.findById(idUtilisateur).map(
+               c ->{
+                   c.setLogin(util.getLogin());
+                   c.setPassword(util.getPassword());
+                   return ResponseEntity.ok(utilisateur.save(c));
+               }).orElse(
+                       ResponseEntity.notFound().build()
+               );
     }
     
     public void deleteById(int idUtilisateur){

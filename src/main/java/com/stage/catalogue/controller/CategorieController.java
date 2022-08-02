@@ -5,12 +5,16 @@ import com.stage.catalogue.service.CategorieService;
 import java.util.List;
 import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.DefaultValue;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 /**
  *
@@ -25,18 +29,18 @@ public class CategorieController {
     private CategorieService categorie;
     
     @PostMapping()
-    public Categorie addCategorie(@RequestBody Categorie cat){
+    public ResponseEntity<Categorie> addCategorie(@RequestBody Categorie cat){
         return categorie.addCategorie(cat);
     }
     
-    @GetMapping(value = "/{id}")
-    public Categorie getCategorieById(@PathParam("idCategorie") int idCategorie){
+    @GetMapping(value = "{id: \\id+}")
+    public ResponseEntity<Categorie> getCategorieById(@PathParam("idCategorie") int idCategorie){
         return categorie.getCategorieById(idCategorie);
     }
     
-    @GetMapping(value = "/{nomCategorie}")
-    public Categorie getCategorieByNom(@PathParam("nomCategorie") String nomCategorie){
-        return categorie.getCategorieByNom(nomCategorie);
+    @GetMapping()
+    public Page<Categorie> getCategorieByNom(@PathParam("nomCategorie") String nomCategorie, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
+        return categorie.getCategorieByNom(nomCategorie, page, size);
     }
     
     @GetMapping(value = "/all")
@@ -44,12 +48,12 @@ public class CategorieController {
         return categorie.getAllCategorie();
     }
     
-    @PutMapping(value = "/edit/{id}")
-    public Categorie updateCategorie(@RequestBody Categorie cat, int idCategorie){
+    @PutMapping("/edit")
+    public ResponseEntity<Categorie> updateCategorie(Categorie cat, @PathParam("idCategorie") int idCategorie){
         return categorie.editCategorieById(cat, idCategorie);
     }
     
-    @DeleteMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/delete/{id: \\id+}")
     public void dropCategorie(int idCategorie){
         categorie.dropCategorieById(idCategorie);
     }

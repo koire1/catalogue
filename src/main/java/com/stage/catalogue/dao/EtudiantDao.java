@@ -1,8 +1,10 @@
 package com.stage.catalogue.dao;
 
 import com.stage.catalogue.entity.Etudiant;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface EtudiantDao extends JpaRepository<Etudiant, Integer>{
-    public Etudiant findEtudiantByMatricule(String matricule);
-    public List<Etudiant> findEtudiantByNomEtudiant(String nomEtudiant);
+    public ResponseEntity<Etudiant> findEtudiantByMatricule(String matricule);
+    public Page<Etudiant> findEtudiantByNomEtudiant(String nomEtudiant, Pageable pageable);
+    public Etudiant findByNomEtudiant(String nomEtudiant);
 }

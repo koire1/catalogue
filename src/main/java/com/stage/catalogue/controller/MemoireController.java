@@ -5,9 +5,9 @@ import com.stage.catalogue.entity.Memoire;
 import com.stage.catalogue.service.MemoireService;
 import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,47 +29,42 @@ public class MemoireController {
     private MemoireService memoire;
     
     @PostMapping()
-    public Memoire addMemoire(@RequestBody Memoire memo){
+    public ResponseEntity<Memoire> addMemoire(@RequestBody Memoire memo){
         return memoire.addMemoire(memo);
     }
     
     @GetMapping(value = "/all")
-    public Page<Memoire> getAllMemoire(@RequestParam("page") int page, @RequestParam("size") int size){
-        Pageable pageable = PageRequest.of(page, size);
-        return memoire.findAll(pageable);
+    public Page<Memoire> getAllMemoire(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
+        return memoire.findAll(page, size);
     }
     
-    @GetMapping(value = "/{anneevalid}")
-    public Page<Memoire> getMemoireByAnneeValid(@RequestParam("page") int page, @RequestParam("size") int size, @PathParam("anneevalid") String anneevalid){
-        Pageable pageable = PageRequest.of(page, size);
-        return memoire.getMemoireByAnneeValid(anneevalid, pageable);
+    @GetMapping()
+    public Page<Memoire> getMemoireByAnneeValid(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("anneevalid") String anneevalid){
+        return memoire.getMemoireByAnneeValid(anneevalid, page, size);
     }
     
-    @GetMapping(value = "/{titre}")
-    public Page<Memoire> getMemoireByTitre(@RequestParam("page") int page, @RequestParam("size") int size, @PathParam("titre") String titre){
-        Pageable pageable = PageRequest.of(page, size);
-        return memoire.getMemoireByTitre(titre, pageable);
+    @GetMapping()
+    public Page<Memoire> getMemoireByTitre(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("titre") String titre){
+        return memoire.getMemoireByTitre(titre, page, size);
     }
     
-    @GetMapping(value = "/{cycle}")
-    public Page<Memoire> getMemoireByCycle(@RequestParam("page") int page, @RequestParam("size") int size, @PathParam("cycle") Cycle cycle){
-        Pageable pageable = PageRequest.of(page, size);
-        return memoire.getMemoireByCycle(cycle, pageable);
+    @GetMapping()
+    public Page<Memoire> getMemoireByCycle(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("cycle") Cycle cycle){
+        return memoire.getMemoireByCycle(cycle, page, size);
     }
     
-    @GetMapping(value = "/{motcle}")
-    public Page<Memoire> getMemoireByMotCle(@RequestParam("page") int page, @RequestParam("size") int size, @PathParam("motcle") String motcle){
-        Pageable pageable = PageRequest.of(page, size);
-        return memoire.getMemoireByMotCle(motcle, pageable);
+    @GetMapping()
+    public Page<Memoire> getMemoireByMotCle(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("motcle") String motcle){
+        return memoire.getMemoireByMotCle(motcle, page, size);
     }
     
-    @PutMapping(value = "/edit/{id}")
-    public Memoire updateMemoireById(@RequestBody Memoire memo, @PathParam("idMemoire") int idMemoire){
+    @PutMapping(value = "/edit")
+    public ResponseEntity<Memoire> updateMemoireById(Memoire memo, @PathParam("idMemoire") int idMemoire){
         return memoire.editMemoireById(memo, idMemoire);
     }
     
-    @DeleteMapping(value = "/delete{id}")
-    public void dropMemoireById(@RequestBody Memoire memo, @PathParam("idMemoire") int idMemoire){
+    @DeleteMapping(value = "/delete/{id: \\id+}")
+    public void dropMemoireById(@PathParam("idMemoire") int idMemoire){
         memoire.dropMemoireById(idMemoire);
     }
 }

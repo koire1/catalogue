@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 public class Specialite implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idSpecialite;
     
     @Column(name = "nomspecialite", nullable = false)

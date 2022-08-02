@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 public class Livre implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idLivre;
     
     @Column(name = "titre", nullable = false)
@@ -22,7 +22,8 @@ public class Livre implements Serializable{
     @Column(name = "nbrepage", nullable = false)
     private int nbrePage;
     
-    @Column(name = "anneepub", nullable = false)
+    @Column(nullable = false)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date anneePub;
     
     @Column(name = "langue", nullable = false)
@@ -37,8 +38,11 @@ public class Livre implements Serializable{
     @Column(name = "isbn", nullable = false)
     private String isbn;
     
-    @Column(name = "image", nullable = false)
-    private String image;
+    @Column(nullable = false, length = 1024*1024*30)
+    byte[] file;
+    
+    @Transient
+    String image;
     
     @Column(name="nbrevuelivre")
     private int nbreVueLivre;
@@ -50,4 +54,9 @@ public class Livre implements Serializable{
     @ManyToOne
     @JoinColumn(name="idCategorie", nullable = false)
     private Categorie categorie;
+    
+    public void updateImage(){
+        this.image = new String(file);
+        this.file = null;
+    }
 }

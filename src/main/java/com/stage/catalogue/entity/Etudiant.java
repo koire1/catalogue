@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 public class Etudiant implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idEtudiant;
     
     @Column(name = "nometudiant", nullable = false)

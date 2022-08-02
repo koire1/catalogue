@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 public class Categorie implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idCategorie;
     
     @Column(name = "nomcategorie", nullable = false)
