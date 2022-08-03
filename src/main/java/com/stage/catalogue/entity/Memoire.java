@@ -1,7 +1,7 @@
 package com.stage.catalogue.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import javax.persistence.*;
 import lombok.Data;
 
@@ -29,7 +29,7 @@ public class Memoire implements Serializable{
     @Column(name = "motcle", nullable = false)
     private String motCle;
     
-    @Column(name = "cycle", nullable = false)
+    @Column(name = "parcours", nullable = false)
     private Cycle cycle;
     
     @Column(name = "nbretelechargememoire")

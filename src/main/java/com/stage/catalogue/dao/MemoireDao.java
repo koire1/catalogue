@@ -16,4 +16,5 @@ public interface MemoireDao extends JpaRepository<Memoire, Integer>{
     public Page<Memoire> findMemoireByMotCle(String motCle, Pageable pageable);
     public Page<Memoire> findMemoireByCycle(Cycle cycle, Pageable pageable);
     public Page<Memoire> findMemoireByAnneeValid(String anneeValid, Pageable pageable);
+    public Memoire findMemoireByIdMemoire(Integer idMemoire);
 }

@@ -2,15 +2,11 @@ package com.stage.catalogue.service;
 
 import com.stage.catalogue.dao.CategorieDao;
 import com.stage.catalogue.entity.Categorie;
-import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 /**
  *
  * @author cellule
@@ -20,39 +16,26 @@ public class CategorieService {
     @Autowired
     private CategorieDao categorie;
     
-    public ResponseEntity<Categorie> addCategorie(Categorie cat){
-            Categorie c = categorie.save(cat);
-            URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(c.getIdCategorie())
-                .toUri();
-        return ResponseEntity.created(location).body(c);    }
+    public Categorie addCategorie(Categorie cat){
+           return categorie.save(cat);    
+    }
     
     public Page<Categorie> getCategorieByNom(String nomCategorie, int page, int size){
         return categorie.findCategorieByNomCategorie(nomCategorie, PageRequest.of(page, size));
     }
     
-    public ResponseEntity<Categorie> getCategorieById(int idCategorie){
-            Optional<Categorie> cat = categorie.findCategorieByIdCategorie(idCategorie);
-            if (cat.isPresent()) {
-            return ResponseEntity.ok(cat.get());
-            }
-        return ResponseEntity.notFound().build();    
+    public Categorie getCategorieById(int idCategorie){
+            return categorie.findCategorieByIdCategorie(idCategorie);
     }
     
-    public List<Categorie> getAllCategorie(){
+    public List<Categorie> getAll(){
         return categorie.findAll();
     }
     
-    public ResponseEntity<Categorie> editCategorieById(Categorie cat, int idCategorie){
-        return categorie.findById(idCategorie).map(
-                c -> {
-                    c.setNomCategorie(cat.getNomCategorie());
-                    return ResponseEntity.ok(categorie.save(c));
-                }
-                                     ).orElse(
-                ResponseEntity.notFound().build()
-        );
+    public Categorie editCategorieById(Categorie cat, int idCategorie){
+        Categorie existingCategorie = categorie.findCategorieByIdCategorie(idCategorie);
+                  existingCategorie.setNomCategorie(cat.getNomCategorie());
+        return categorie.save(existingCategorie);
     }
     
     public void dropCategorieById(int idCategorie){

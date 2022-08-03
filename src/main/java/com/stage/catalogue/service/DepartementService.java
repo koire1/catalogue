@@ -2,14 +2,11 @@ package com.stage.catalogue.service;
 
 import com.stage.catalogue.dao.DepartementDao;
 import com.stage.catalogue.entity.Departement;
-import java.net.URI;
-import java.util.Optional;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 /**
  *
  * @author cellule
@@ -19,41 +16,27 @@ public class DepartementService {
     @Autowired
     private DepartementDao departement;
     
-    public ResponseEntity<Departement> addDepartement(Departement depart){
-        Departement dep = departement.save(depart);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                        .path("/{id}")
-                        .buildAndExpand(dep.getIdDepart())
-                        .toUri();
-        return ResponseEntity.created(location).body(dep);
-        
+    public Departement addDepartement(Departement depart){
+        return departement.save(depart);
     }
     
-    public ResponseEntity<Departement> getDepartementById(int idDepart){
-        Optional<Departement> dep = departement.findById(idDepart);
-        if(dep.isPresent()){
-            return ResponseEntity.ok(dep.get());
-        }
-        return ResponseEntity.notFound().build();
+    public Departement getDepartementById(int idDepart){
+         return departement.findDepartementByIdDepart(idDepart);
     }
     
     public Page<Departement> getDepartementByNom(String nomDepart, int page, int size){
         return departement.findDepartementByNomDepart(nomDepart, PageRequest.of(page, size));
     }
     
-    public Page<Departement> getAllDepartement(int page, int size){
-        return departement.findAllDepartement(PageRequest.of(page, size));
+    public List<Departement> getAll(){
+        return departement.findAll();
     }
     
-    public ResponseEntity<Departement> editDepartement(Departement depart, int idDepart){
-        return departement.findDepartementByIdDepart(idDepart).map(
-                c -> {
-                    c.setNomDepart(depart.getNomDepart());
-                    c.setSpecialite(depart.getSpecialite());
-                    return ResponseEntity.ok(departement.save(c));
-                }   ).orElse(
-                    ResponseEntity.notFound().build()
-                    );
+    public Departement editDepartement(Departement depart, int idDepart){
+        Departement existingDepartement = departement.findDepartementByIdDepart(idDepart);
+                    existingDepartement.setNomDepart(depart.getNomDepart());
+                    existingDepartement.setSpecialite(depart.getSpecialite());
+        return departement.save(existingDepartement);
     }
     
     public void dropDepartementById(int idDepart){

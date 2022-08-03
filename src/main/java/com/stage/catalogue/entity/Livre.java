@@ -1,7 +1,7 @@
 package com.stage.catalogue.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import javax.persistence.*;
 import lombok.Data;
 
@@ -38,10 +38,7 @@ public class Livre implements Serializable{
     @Column(name = "isbn", nullable = false)
     private String isbn;
     
-    @Column(nullable = false, length = 1024*1024*30)
-    byte[] file;
-    
-    @Transient
+    @Column(name = "image", nullable = false)
     String image;
     
     @Column(name="nbrevuelivre")
@@ -54,9 +51,5 @@ public class Livre implements Serializable{
     @ManyToOne
     @JoinColumn(name="idCategorie", nullable = false)
     private Categorie categorie;
-    
-    public void updateImage(){
-        this.image = new String(file);
-        this.file = null;
-    }
+   
 }

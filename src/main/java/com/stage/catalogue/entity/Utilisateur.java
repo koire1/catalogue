@@ -16,12 +16,12 @@ public class Utilisateur implements Serializable{
     private int idUtilisateur;
     
     @Column(name = "login", nullable = false)
-    private String login;
+    private Role login;
     
     @Column(name = "password", nullable = false)
     private String password;
     
-    @Column(name = "roleutilisateur", nullable = false)
-    private Role roleUtilisateur;
+    @Column(name = "nom", nullable = false)
+    private String nom;
 
 }
