@@ -3,6 +3,7 @@ package com.stage.catalogue.controller;
 import com.stage.catalogue.entity.Etudiant;
 import com.stage.catalogue.service.EtudiantService;
 import java.util.List;
+import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
@@ -32,13 +33,13 @@ public class EtudiantController {
         return etudiant.addEtudiant(etud);
     }
     
-    @GetMapping("/search/{matricule}")
-    public Etudiant getEtudiantByMatricule(@PathVariable("matricule") String matricule){
+    @GetMapping("/search/matricule")
+    public Etudiant getEtudiantByMatricule(@PathParam("matricule") String matricule){
         return etudiant.getEtudiantByMatricule(matricule);
     }
     
-    @GetMapping("/{nometudiant}")
-    public Page<Etudiant> getEtudiantByNomEtudiant(@PathVariable("nometudiant") String nomEtudiant, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
+    @GetMapping("/search/nomEtudiant")
+    public Page<Etudiant> getEtudiantByNomEtudiant(@PathParam("nometudiant") String nomEtudiant, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
         return etudiant.getEtudiantByNom(nomEtudiant, page, size);
     }
     

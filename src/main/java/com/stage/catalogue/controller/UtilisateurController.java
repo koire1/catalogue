@@ -4,6 +4,7 @@ import com.stage.catalogue.entity.Utilisateur;
 import com.stage.catalogue.entity.Role;
 import com.stage.catalogue.service.UtilisateurService;
 import java.util.List;
+import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,8 +30,8 @@ public class UtilisateurController {
         return utilisateur.addUtilisateur(util);
     }
     
-    @GetMapping("/search/{nom}")
-    public Utilisateur getUtilisateurByNom(@PathVariable("nom") String nom){
+    @GetMapping("/search")
+    public Utilisateur getUtilisateurByNom(@PathParam("nom") String nom){
         return utilisateur.getUtilisateurByNom(nom);
     }
     

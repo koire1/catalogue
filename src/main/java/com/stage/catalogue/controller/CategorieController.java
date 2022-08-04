@@ -3,6 +3,7 @@ package com.stage.catalogue.controller;
 import com.stage.catalogue.entity.Categorie;
 import com.stage.catalogue.service.CategorieService;
 import java.util.List;
+import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
@@ -32,13 +33,13 @@ public class CategorieController {
         return categorie.addCategorie(cat);
     }
     
-    @GetMapping(value = "/search/{id}")
+    @GetMapping(value = "/{id}")
     public Categorie getCategorieById(@PathVariable("id") int idCategorie){
         return categorie.getCategorieById(idCategorie);
     }
     
-    @GetMapping("/{nomcategorie}")
-    public Page<Categorie> getCategorieByNom(@PathVariable("nomcategorie") String nomCategorie, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
+    @GetMapping("/search")
+    public Page<Categorie> getCategorieByNom(@PathParam("nomcategorie") String nomCategorie, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
         return categorie.getCategorieByNom(nomCategorie, page, size);
     }
     

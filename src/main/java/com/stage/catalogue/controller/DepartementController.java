@@ -3,6 +3,7 @@ package com.stage.catalogue.controller;
 import com.stage.catalogue.entity.Departement;
 import com.stage.catalogue.service.DepartementService;
 import java.util.List;
+import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
@@ -32,8 +33,8 @@ public class DepartementController {
         return departement.addDepartement(depart);
     }
     
-    @GetMapping("/search/{nomdepart}")
-    public Page<Departement> getDepartementByNom(@PathVariable("nomdepart") String nomDepart, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
+    @GetMapping("/search")
+    public Page<Departement> getDepartementByNom(@PathParam("nomdepart") String nomDepart, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
         return departement.getDepartementByNom(nomDepart, page, size);
     }
     

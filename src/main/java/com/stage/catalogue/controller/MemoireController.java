@@ -3,6 +3,7 @@ package com.stage.catalogue.controller;
 import com.stage.catalogue.entity.Cycle;
 import com.stage.catalogue.entity.Memoire;
 import com.stage.catalogue.service.MemoireService;
+import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
@@ -37,23 +38,23 @@ public class MemoireController {
         return memoire.findAll(page, size);
     }
     
-    @GetMapping("/search/anneeValid/{anneevalid}")
-    public Page<Memoire> getMemoireByAnneeValid(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathVariable("anneevalid") String anneevalid){
+    @GetMapping("/search/anneeValid")
+    public Page<Memoire> getMemoireByAnneeValid(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("anneevalid") String anneevalid){
         return memoire.getMemoireByAnneeValid(anneevalid, page, size);
     }
     
-    @GetMapping("/search/titre/{titre}")
-    public Page<Memoire> getMemoireByTitre(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @PathVariable("size") int size, @PathVariable("titre") String titre){
+    @GetMapping("/search/titre")
+    public Page<Memoire> getMemoireByTitre(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("titre") String titre){
         return memoire.getMemoireByTitre(titre, page, size);
     }
     
-    @GetMapping("/search/cycle/{cycle}")
-    public Page<Memoire> getMemoireByCycle(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathVariable("cycle") Cycle cycle){
+    @GetMapping("/search/cycle")
+    public Page<Memoire> getMemoireByCycle(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("cycle") Cycle cycle){
         return memoire.getMemoireByCycle(cycle, page, size);
     }
     
-    @GetMapping("/search/motCle/{motcle}")
-    public Page<Memoire> getMemoireByMotCle(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathVariable("motcle") String motcle){
+    @GetMapping("/search/motCle")
+    public Page<Memoire> getMemoireByMotCle(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("motcle") String motcle){
         return memoire.getMemoireByMotCle(motcle, page, size);
     }
     
