@@ -1,8 +1,10 @@
 package com.stage.catalogue.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 import lombok.Data;
 
 /**
@@ -19,6 +21,11 @@ public class Auteur implements Serializable{
     @Column(name = "nomauteur", nullable = false)
     private String nomAuteur;
     
-    @OneToMany(mappedBy="auteur")
-    private List<Livre> livre;
+    @JsonIgnore
+    @XmlTransient
+    @ManyToMany
+    @JoinTable(name = "auteur_livre",
+               joinColumns = @JoinColumn(name = "idAuteur"),
+               inverseJoinColumns = @JoinColumn(name = "idLivre"))
+    private List<Livre> livres;
 }

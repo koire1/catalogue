@@ -1,6 +1,7 @@
 package com.stage.catalogue.service;
 
 import com.stage.catalogue.dao.LivreDao;
+import com.stage.catalogue.entity.Auteur;
 import com.stage.catalogue.entity.Langue;
 import com.stage.catalogue.entity.Livre;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class LivreService {
+    
     @Autowired
     private LivreDao livre;
    
@@ -51,11 +53,19 @@ public class LivreService {
     public Page<Livre> findAll(int page, int size){
         return livre.findAll(PageRequest.of(page, size));
     }
+   /* public Page<Auteur> getByNomAuteur(String nomAuteur, int page, int size){
+        return livre.findLivreByNomAuteur(nomAuteur, PageRequest.of(page, size));
+    }
+    
+    public Page<Livre> getByNomCategorie(String nomCategorie, int page, int size){
+        return livre.findByCategorie(nomCategorie, PageRequest.of(page, size));
+    }*/
     
     public Livre editLivreById(Livre liv, int idLivre){
         Livre existingLivre = livre.findLivreByIdLivre(idLivre);
               existingLivre.setAnneePub(liv.getAnneePub());
-              existingLivre.setAuteur(liv.getAuteur());
+              existingLivre.setAuteurs(liv.getAuteurs());              
+              existingLivre.setCategorie(liv.getCategorie());              
               existingLivre.setCategorie(liv.getCategorie());
               existingLivre.setCote(liv.getCote());
               existingLivre.setIsbn(liv.getIsbn());

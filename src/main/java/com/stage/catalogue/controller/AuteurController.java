@@ -7,7 +7,6 @@ import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @author cellule
  */
 @RestController
-@CrossOrigin("localhost:9193")
 @RequestMapping("/auteurs")
 
 public class AuteurController {
@@ -40,22 +38,22 @@ public class AuteurController {
         return auteur.getAuteurById(idAuteur);
     }
     
-    @GetMapping(value = "/search/nomAuteur")
+    @GetMapping(value = "/nomAuteur")
     public Page<Auteur> getAuteurByNom(@PathParam("nomauteur") String nomAuteur, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
         return auteur.getAuteurByNom(nomAuteur, page, size);
     }
     
-    @GetMapping(value = "/all")
+    @GetMapping()
     public List<Auteur> getAllAuteur(){
         return auteur.getAll();
     }
     
-    @PutMapping(value = "/edit/{id}")
+    @PutMapping(value = "/{id}")
     public Auteur updateAuteur(Auteur aut, @PathVariable("id") int idAuteur){
         return auteur.editAuteur(aut, idAuteur);
     }
     
-    @DeleteMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/{id}")
     public void dropAuteur(@PathVariable("id") int idAuteur){
         auteur.dropAuteurById(idAuteur);
     }

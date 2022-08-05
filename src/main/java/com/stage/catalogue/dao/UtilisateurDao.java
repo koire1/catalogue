@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UtilisateurDao extends JpaRepository<Utilisateur, Integer>{
-    public Utilisateur findUtilisateurByLoginAndPasswordAndNom(Role login, String password, String nom);
-    public Utilisateur findByNom(String nom);
+    public Utilisateur findUtilisateurByNameAndPasswordAndLogin(String name, String password, Role login);
+    public Utilisateur findByName(String name);
     public Utilisateur findUtilisateurByIdUtilisateur(Integer idUtilisateur);
 }

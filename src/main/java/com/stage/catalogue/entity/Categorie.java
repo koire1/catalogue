@@ -1,8 +1,10 @@
 package com.stage.catalogue.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 import lombok.Data;
 
 /**
@@ -19,6 +21,8 @@ public class Categorie implements Serializable{
     @Column(name = "nomcategorie", nullable = false)
     private String nomCategorie;
     
+    @JsonIgnore
+    @XmlTransient
     @OneToMany(mappedBy = "categorie")
-    private List<Livre> livre;
+    private List<Livre> livres;
 }

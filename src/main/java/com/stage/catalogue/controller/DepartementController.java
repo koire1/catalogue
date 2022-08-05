@@ -1,6 +1,7 @@
 package com.stage.catalogue.controller;
 
 import com.stage.catalogue.entity.Departement;
+import com.stage.catalogue.entity.Specialite;
 import com.stage.catalogue.service.DepartementService;
 import java.util.List;
 import javax.websocket.server.PathParam;
@@ -33,7 +34,7 @@ public class DepartementController {
         return departement.addDepartement(depart);
     }
     
-    @GetMapping("/search")
+    @GetMapping("/nomdepart")
     public Page<Departement> getDepartementByNom(@PathParam("nomdepart") String nomDepart, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
         return departement.getDepartementByNom(nomDepart, page, size);
     }
@@ -43,17 +44,37 @@ public class DepartementController {
         return departement.getDepartementById(idDepart);
     }
     
-    @GetMapping(value = "/all")
+    @GetMapping(value = "/{id}/specialites")
+    public List<Specialite> listSpecialite(@PathVariable("id") int idDepart){
+        return departement.getSpecialite(idDepart);
+    }
+    
+    @PutMapping(value = "/{idDepart}/specialite/idSpecial")
+    public Specialite modifSpecialite(@PathVariable("idDepart") int idDepart, @PathParam("idSpecial") int id, @RequestBody Specialite special){
+        return departement.editSpecialite(idDepart, id, special);
+    }
+    
+    @PostMapping(value = "/{idDepart}/specialite")
+    public Specialite ajoutSpecialite(@PathVariable("idDepart") int idDepart, @RequestBody Specialite special){
+        return departement.addSpecialite(special);
+    }
+    
+    @DeleteMapping(value = "/{id}/specialite/idSpecial")
+    public void suppSpecialite(@PathVariable("id") int idDepart, @PathParam("idSpecial") int idSpecial){
+        departement.deleteSpecialite(idSpecial);
+    }
+    
+    @GetMapping()
     public List<Departement> getAll(){
         return departement.getAll();
     }
     
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public Departement updateDepartementById(Departement depart, @PathVariable("id") int idDepart){
         return departement.editDepartement(depart, idDepart);
     }
     
-    @DeleteMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/{id}")
     public void dropDepartementById(@PathVariable("id") int idDepart){
         departement.dropDepartementById(idDepart);
     }

@@ -30,12 +30,12 @@ public class UtilisateurController {
         return utilisateur.addUtilisateur(util);
     }
     
-    @GetMapping("/search")
-    public Utilisateur getUtilisateurByNom(@PathParam("nom") String nom){
-        return utilisateur.getUtilisateurByNom(nom);
+    @GetMapping("/name")
+    public Utilisateur getUtilisateurByName(@PathParam("name") String name){
+        return utilisateur.getUtilisateurByName(name);
     }
     
-    @GetMapping(value = "/all")
+    @GetMapping()
     public List<Utilisateur> getAll(){
         return utilisateur.getAll();
     }
@@ -43,25 +43,25 @@ public class UtilisateurController {
     @PostMapping(value = "/login")
     public Utilisateur loginUtilisateur(@RequestBody Utilisateur util)
     throws Exception{
-            String tempNom = util.getNom();
-            Role tempLogin = util.getLogin();
+            String tempNom = util.getName();
             String tempPassword = util.getPassword();
+            Role tempLogin = util.getLogin();
             Utilisateur utilObject = null;
             
-            if(tempLogin != null && tempPassword != null && tempNom != null){
-                utilObject = utilisateur.getUtilisateurByLoginAndPasswordAndNom(tempLogin, tempPassword, tempNom);
+            if(tempPassword != null && tempNom != null){
+                utilObject = utilisateur.getUtilisateurByNameAndPasswordAndLogin(tempNom, tempPassword, tempLogin);
            }if(utilObject == null){
                throw new Exception("Bad credentials");
            }
            return utilObject;
     }
     
-    @PutMapping(value = "/edit/{id}")
+    @PutMapping(value = "/{id}")
     public Utilisateur updateUtilisateur(Utilisateur util, @PathVariable("id") int idUtilisateur){
         return utilisateur.editUtilisateur(util, idUtilisateur);
     }
     
-    @DeleteMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/{id}")
     public void dropUtilisateurById(@PathVariable("idUtilisateur") int idUtilisateur){
         utilisateur.deleteById(idUtilisateur);
     }

@@ -33,37 +33,37 @@ public class MemoireController {
         return memoire.addMemoire(memo);
     }
     
-    @GetMapping(value = "/all")
+    @GetMapping()
     public Page<Memoire> getAllMemoire(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
         return memoire.findAll(page, size);
     }
     
-    @GetMapping("/search/anneeValid")
+    @GetMapping("/anneeValid")
     public Page<Memoire> getMemoireByAnneeValid(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("anneevalid") String anneevalid){
         return memoire.getMemoireByAnneeValid(anneevalid, page, size);
     }
     
-    @GetMapping("/search/titre")
+    @GetMapping("/titre")
     public Page<Memoire> getMemoireByTitre(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("titre") String titre){
         return memoire.getMemoireByTitre(titre, page, size);
     }
     
-    @GetMapping("/search/cycle")
+    @GetMapping("/cycle")
     public Page<Memoire> getMemoireByCycle(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("cycle") Cycle cycle){
         return memoire.getMemoireByCycle(cycle, page, size);
     }
     
-    @GetMapping("/search/motCle")
+    @GetMapping("/motCle")
     public Page<Memoire> getMemoireByMotCle(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("motcle") String motcle){
         return memoire.getMemoireByMotCle(motcle, page, size);
     }
     
-    @PutMapping(value = "/edit/{id}")
+    @PutMapping(value = "/{id}")
     public Memoire updateMemoireById(Memoire memo, @PathVariable("idMemoire") int idMemoire){
         return memoire.editMemoireById(memo, idMemoire);
     }
     
-    @DeleteMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/{id}")
     public void dropMemoireById(@PathVariable("idMemoire") int idMemoire){
         memoire.dropMemoireById(idMemoire);
     }

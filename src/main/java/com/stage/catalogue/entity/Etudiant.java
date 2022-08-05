@@ -1,8 +1,10 @@
 package com.stage.catalogue.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 import lombok.Data;
 
 /**
@@ -25,7 +27,12 @@ public class Etudiant implements Serializable{
     @Column(name = "matricule", nullable = false)
     private String matricule;
     
-    @OneToMany(mappedBy="etudiant")
-    private List<Memoire> memoire;
+    @JsonIgnore
+    @XmlTransient
+    @ManyToMany
+    @JoinTable(name = "etudiant_memoire",
+               joinColumns = @JoinColumn(name = "idEtudiant"),
+               inverseJoinColumns = @JoinColumn(name = "idMemoire"))
+    private List<Memoire> memoires;
     
 }

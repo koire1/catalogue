@@ -15,13 +15,13 @@ public class Utilisateur implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUtilisateur;
     
-    @Column(name = "login", nullable = false)
-    private Role login;
-    
     @Column(name = "password", nullable = false)
     private String password;
     
+    @Column(name = "login", nullable = false)
+    private Role login;
+    
     @Column(name = "nom", nullable = false)
-    private String nom;
+    private String name;
 
 }

@@ -2,7 +2,7 @@ package com.stage.catalogue.dao;
 
 import com.stage.catalogue.entity.Langue;
 import org.springframework.stereotype.Repository;
-
+import com.stage.catalogue.entity.Auteur;
 import com.stage.catalogue.entity.Livre;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +20,7 @@ public interface LivreDao extends JpaRepository<Livre, Integer>{
     public Page<Livre> findLivreByMaisonEdit(String maisonEdit, Pageable pageable);
     public Page<Livre> findLivreByTitreAndLangue(String titre, Langue langue, Pageable pageable);
     public Page<Livre> findLivreByLangue(Langue langue, Pageable pageable);
-    public Livre findByCategorie(String nomCategorie);
-    public Livre findLivreByIdLivre(Integer idLivre);
+   // public Page<Livre> findByCategorie(String nomCategorie, Pageable pageable);
+    public Livre findLivreByIdLivre(int idLivre);
+    //public Page<Auteur> findLivreByNomAuteur(String nomAuteur, Pageable pageable);
 }

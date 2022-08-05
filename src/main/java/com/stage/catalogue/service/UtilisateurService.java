@@ -20,12 +20,12 @@ public class UtilisateurService {
         return utilisateur.save(util);
     }
     
-    public Utilisateur getUtilisateurByLoginAndPasswordAndNom(Role login, String password, String nom){
-        return utilisateur.findUtilisateurByLoginAndPasswordAndNom(login, password, nom);
+    public Utilisateur getUtilisateurByNameAndPasswordAndLogin(String name, String password, Role login){
+        return utilisateur.findUtilisateurByNameAndPasswordAndLogin(name, password, login);
     }
     
-    public Utilisateur getUtilisateurByNom(String nom){
-        return utilisateur.findByNom(nom);
+    public Utilisateur getUtilisateurByName(String name){
+        return utilisateur.findByName(name);
     }
     
     public List<Utilisateur> getAll(){
@@ -35,7 +35,7 @@ public class UtilisateurService {
     public Utilisateur editUtilisateur(Utilisateur util, int idUtilisateur){
        Utilisateur existingUtilisateur = utilisateur.findUtilisateurByIdUtilisateur(idUtilisateur);
                    existingUtilisateur.setLogin(util.getLogin());
-                   existingUtilisateur.setNom(util.getNom());
+                   existingUtilisateur.setName(util.getName());
                    existingUtilisateur.setPassword(util.getPassword());
         return utilisateur.save(existingUtilisateur);
     }

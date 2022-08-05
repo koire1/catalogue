@@ -15,6 +15,7 @@ public class SpecialiteService {
     private SpecialiteDao specialite;
     
     public Specialite addSpecialite(Specialite special){
+        special.setDepartement(special.getDepartement());
         return specialite.save(special);
     }
     

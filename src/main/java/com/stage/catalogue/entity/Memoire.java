@@ -2,6 +2,7 @@ package com.stage.catalogue.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
 
@@ -42,8 +43,10 @@ public class Memoire implements Serializable{
     @JoinColumn(name = "idDepart", nullable = false)
     private Departement departement;
     
-    @ManyToOne
-    @JoinColumn(name="idEtudiant", nullable = false)
-    private Etudiant etudiant;
+    @ManyToMany
+    @JoinTable(name = "etudiant_memoire",
+               joinColumns = @JoinColumn(name = "idMemoire"),
+               inverseJoinColumns = @JoinColumn(name = "idEtudiant"))
+    private List<Etudiant> etudiants;
     
 }

@@ -38,22 +38,22 @@ public class CategorieController {
         return categorie.getCategorieById(idCategorie);
     }
     
-    @GetMapping("/search")
+    @GetMapping("/nomcategorie")
     public Page<Categorie> getCategorieByNom(@PathParam("nomcategorie") String nomCategorie, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
         return categorie.getCategorieByNom(nomCategorie, page, size);
     }
     
-    @GetMapping(value = "/all")
+    @GetMapping()
     public List<Categorie> getAll(){
         return categorie.getAll();
     }
     
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public Categorie updateCategorie(Categorie cat, @PathVariable("id") int idCategorie){
         return categorie.editCategorieById(cat, idCategorie);
     }
     
-    @DeleteMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/{id}")
     public void dropCategorie(@PathVariable("id") int idCategorie){
         categorie.dropCategorieById(idCategorie);
     }

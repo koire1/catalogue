@@ -17,6 +17,8 @@ public class MemoireService {
     private MemoireDao memoire;
     
     public Memoire addMemoire(Memoire memo){
+        memo.setDepartement(memo.getDepartement());
+        memo.setEtudiants(memo.getEtudiants());
         return memoire.save(memo);
     }
     
@@ -45,7 +47,7 @@ public class MemoireService {
                 existingMemoire.setAnneeValid(memo.getAnneeValid());
                 existingMemoire.setCycle(memo.getCycle());
                 existingMemoire.setDepartement(memo.getDepartement());
-                existingMemoire.setEtudiant(memo.getEtudiant());
+                existingMemoire.setEtudiants(memo.getEtudiants());
                 existingMemoire.setLienTelecharge(memo.getLienTelecharge());
                 existingMemoire.setMotCle(memo.getMotCle());
                 existingMemoire.setNbreTelechargeMemoire(memo.getNbreTelechargeMemoire());

@@ -1,7 +1,9 @@
 package com.stage.catalogue.entity;
 
+import com.sun.istack.NotNull;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
 
@@ -39,17 +41,21 @@ public class Livre implements Serializable{
     private String isbn;
     
     @Column(name = "image", nullable = false)
-    String image;
+     private String image;
     
     @Column(name="nbrevuelivre")
     private int nbreVueLivre;
     
-    @ManyToOne
-    @JoinColumn(name="idAuteur", nullable = false)
-    private Auteur auteur;
+    @ManyToMany
+    @JoinTable(name = "auteur_livre",
+               joinColumns = @JoinColumn(name = "idLivre"),
+               inverseJoinColumns = @JoinColumn(name = "idAuteur"))
+    private List<Auteur> auteurs;
     
+    
+    //@NotNull
     @ManyToOne
-    @JoinColumn(name="idCategorie", nullable = false)
+    @JoinColumn(name="idCategorie")
     private Categorie categorie;
    
 }
