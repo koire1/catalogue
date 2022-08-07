@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlTransient;
 import lombok.Data;
 
@@ -13,13 +14,17 @@ import lombok.Data;
  */
 @Entity
 @Data
+@Table(name = "auteur")
 public class Auteur implements Serializable{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idAuteur;
     
-    @Column(name = "nomauteur", nullable = false)
-    private String nomAuteur;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @NotNull
+    @Column(name = "nom", nullable = false)
+    private String nom;
     
     @JsonIgnore
     @XmlTransient

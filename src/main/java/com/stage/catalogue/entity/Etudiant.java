@@ -13,18 +13,18 @@ import lombok.Data;
  */
 @Entity
 @Data
+@Table(name = "etudiant")
 public class Etudiant implements Serializable{
+    
     @Id
+    @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idEtudiant;
+    private Long id;
     
-    @Column(name = "nometudiant", nullable = false)
-    private String nomEtudiant;
+    @Column(name = "nom", nullable = false)
+    private String nom;
     
-    @Column(name = "prenometudiant", nullable = false)
-    private String prenomEtudiant;
-    
-    @Column(name = "matricule", nullable = false)
+    @Column(name = "matricule", nullable = false, unique = true)
     private String matricule;
     
     @JsonIgnore
