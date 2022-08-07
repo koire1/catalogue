@@ -19,7 +19,7 @@ public class Livre implements Serializable{
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idLivre;
+    private Long id;
     
     @NotNull
     @Column(name = "titre", nullable = false)

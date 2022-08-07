@@ -34,9 +34,4 @@ public class Departement implements Serializable{
     @OneToMany(mappedBy = "departement")
     private List<Specialite> specialites;
     
-    
-    @JsonIgnore
-    @XmlTransient
-    @OneToMany(mappedBy = "departement")
-    private List<Memoire> memoires;
 }
