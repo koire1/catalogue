@@ -17,8 +17,8 @@ import lombok.Data;
 public class Livre implements Serializable{
     
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
     
     @NotNull

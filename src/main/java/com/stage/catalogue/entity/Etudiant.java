@@ -29,10 +29,7 @@ public class Etudiant implements Serializable{
     
     @JsonIgnore
     @XmlTransient
-    @ManyToMany
-    @JoinTable(name = "etudiant_memoire",
-               joinColumns = @JoinColumn(name = "idEtudiant"),
-               inverseJoinColumns = @JoinColumn(name = "idMemoire"))
+    @ManyToMany(mappedBy = "etudiants")
     private List<Memoire> memoires;
     
 }

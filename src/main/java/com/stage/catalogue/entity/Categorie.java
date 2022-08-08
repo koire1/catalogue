@@ -1,11 +1,8 @@
 package com.stage.catalogue.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlTransient;
 import lombok.Data;
 
 /**
@@ -18,8 +15,8 @@ import lombok.Data;
 public class Categorie implements Serializable{
     
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
     
     @NotNull

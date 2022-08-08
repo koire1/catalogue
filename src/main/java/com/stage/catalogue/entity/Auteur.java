@@ -28,9 +28,6 @@ public class Auteur implements Serializable{
     
     @JsonIgnore
     @XmlTransient
-    @ManyToMany
-    @JoinTable(name = "auteur_livre",
-               joinColumns = @JoinColumn(name = "idAuteur"),
-               inverseJoinColumns = @JoinColumn(name = "idLivre"))
+    @ManyToMany(mappedBy = "auteurs")
     private List<Livre> livres;
 }

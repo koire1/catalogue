@@ -3,6 +3,7 @@ package com.stage.catalogue.service;
 import com.stage.catalogue.dao.DiplomeDao;
 import com.stage.catalogue.entity.Diplome;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class DiplomeService {
     
+    @Autowired
     private DiplomeDao diplomeDao;
     
     public Diplome save(Diplome diplome){
