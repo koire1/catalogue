@@ -39,7 +39,7 @@ public class DiplomeService {
         return diplomeDao.findAll(PageRequest.of(page, size));
     }
     
-    public Diplome findById(long id){
-        return diplomeDao.findById(id).orElse(null);
+    public Optional<Diplome> findById(long id){
+        return diplomeDao.findById(id);
     }
 }

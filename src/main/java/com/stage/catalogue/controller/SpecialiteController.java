@@ -18,40 +18,41 @@ import org.springframework.web.bind.annotation.RestController;
  * @author cellule
  */
 @RestController
-@RequestMapping("/specialites")
+@RequestMapping("${apiPrefix}/specialites")
 
 public class SpecialiteController {
 
     @Autowired
-    private SpecialiteService specialite;
+    private SpecialiteService specialiteService;
     
     @PostMapping()
     public Specialite addSpecialite(@RequestBody Specialite special){
-        return specialite.addSpecialite(special);
+        return specialiteService.addSpecialite(special);
     }
     
+    // TODO I need to revise this
     @GetMapping("/nomspecialite")
     public Specialite getSpecialiteByNomSpecialite(@PathParam("nomspecialite") String nomSpecialite){
-        return specialite.getSpecialiteByNomSpecialite(nomSpecialite);
+        return specialiteService.getSpecialiteByNomSpecialite(nomSpecialite);
     }
     
     @GetMapping(value = "/{id}")
-    public Specialite getSpecialiteById(@PathVariable("id") int idSpecialite){
-        return specialite.getSpecialiteById(idSpecialite);
+    public Specialite getSpecialiteById(@PathVariable("id") long idSpecialite){
+        return specialiteService.getSpecialiteById(idSpecialite);
     }
     
     @GetMapping()
     public List<Specialite> getAll(){
-        return specialite.getAll();
+        return specialiteService.getAll();
     }
     
     @PutMapping(value = "/{id}")
-    public Specialite updateSpecialite(@RequestBody Specialite special, @PathVariable("id") int idSpecialite){
-        return specialite.editSpecialiteById(special, idSpecialite);
+    public Specialite updateSpecialite(@RequestBody Specialite special, @PathVariable("id") long idSpecialite){
+        return specialiteService.editSpecialite(special);
     }
     
     @DeleteMapping(value = "/{id}")
-    public void deleteSpecialiteById(@PathVariable("id") int idSpecialite){
-        specialite.deleteSpecialiteById(idSpecialite);
+    public void deleteSpecialiteById(@PathVariable("id") long idSpecialite){
+        specialiteService.deleteSpecialiteById(idSpecialite);
     }
 }

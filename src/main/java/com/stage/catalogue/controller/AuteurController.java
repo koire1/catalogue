@@ -21,40 +21,41 @@ import org.springframework.web.bind.annotation.RestController;
  * @author cellule
  */
 @RestController
-@RequestMapping("/auteurs")
+@RequestMapping("${apiPrefix}/auteurs")
 
 public class AuteurController {
     
     @Autowired
     private AuteurService auteur;
     
-    @PostMapping()
+    @PostMapping
     public Auteur addAuteur(@RequestBody Auteur aut){
         return auteur.addAuteur(aut);
     }
     
     @GetMapping(value = "/{id}")
-    public Auteur getAuteurById(@PathVariable("id") int idAuteur){
+    public Auteur getAuteurById(@PathVariable("id") long idAuteur){
         return auteur.getAuteurById(idAuteur);
     }
     
+    // TODO ce mapping n'est pas correct
     @GetMapping(value = "/nomAuteur")
     public Page<Auteur> getAuteurByNom(@PathParam("nomauteur") String nomAuteur, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
         return auteur.getAuteurByNom(nomAuteur, page, size);
     }
     
-    @GetMapping()
+    @GetMapping
     public List<Auteur> getAllAuteur(){
         return auteur.getAll();
     }
     
     @PutMapping(value = "/{id}")
-    public Auteur updateAuteur(Auteur aut, @PathVariable("id") int idAuteur){
-        return auteur.editAuteur(aut, idAuteur);
+    public Auteur updateAuteur(Auteur aut, @PathVariable("id") long idAuteur){
+        return auteur.editAuteur(aut);
     }
     
     @DeleteMapping(value = "/{id}")
-    public void dropAuteur(@PathVariable("id") int idAuteur){
+    public void dropAuteur(@PathVariable("id") long idAuteur){
         auteur.dropAuteurById(idAuteur);
     }
 }

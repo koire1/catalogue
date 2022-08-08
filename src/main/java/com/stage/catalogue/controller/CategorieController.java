@@ -21,40 +21,41 @@ import org.springframework.web.bind.annotation.RestController;
  * @author cellule
  */
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("${apiPrefix}/categories")
 
 public class CategorieController {
     
     @Autowired
-    private CategorieService categorie;
+    private CategorieService categorieService;
     
     @PostMapping()
     public Categorie addCategorie(@RequestBody Categorie cat){
-        return categorie.addCategorie(cat);
+        return categorieService.addCategorie(cat);
     }
     
     @GetMapping(value = "/{id}")
-    public Categorie getCategorieById(@PathVariable("id") int idCategorie){
-        return categorie.getCategorieById(idCategorie);
+    public Categorie getCategorieById(@PathVariable("id") long idCategorie){
+        return categorieService.getCategorieById(idCategorie);
     }
     
+    // TODO revision needed here
     @GetMapping("/nomcategorie")
     public Page<Categorie> getCategorieByNom(@PathParam("nomcategorie") String nomCategorie, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
-        return categorie.getCategorieByNom(nomCategorie, page, size);
+        return categorieService.getCategorieByNom(nomCategorie, page, size);
     }
     
-    @GetMapping()
+    @GetMapping
     public List<Categorie> getAll(){
-        return categorie.getAll();
+        return categorieService.getAll();
     }
     
     @PutMapping("/{id}")
-    public Categorie updateCategorie(Categorie cat, @PathVariable("id") int idCategorie){
-        return categorie.editCategorieById(cat, idCategorie);
+    public Categorie updateCategorie(Categorie cat, @PathVariable("id") long idCategorie){
+        return categorieService.editCategorieById(cat);
     }
     
     @DeleteMapping(value = "/{id}")
-    public void dropCategorie(@PathVariable("id") int idCategorie){
-        categorie.dropCategorieById(idCategorie);
+    public void dropCategorie(@PathVariable("id") long idCategorie){
+        categorieService.dropCategorieById(idCategorie);
     }
 }

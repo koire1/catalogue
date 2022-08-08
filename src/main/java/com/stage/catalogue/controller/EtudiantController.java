@@ -21,40 +21,42 @@ import org.springframework.web.bind.annotation.RestController;
  * @author cellule
  */
 @RestController
-@RequestMapping("/etudiants")
+@RequestMapping("${apiPrefix}/etudiants")
 
 public class EtudiantController {
 
     @Autowired
-    private EtudiantService etudiant;
+    private EtudiantService etudiantService;
     
     @PostMapping()
     public Etudiant addEtudiant(@RequestBody Etudiant etud){
-        return etudiant.addEtudiant(etud);
+        return etudiantService.addEtudiant(etud);
     }
     
+    // TODO need to revise this mapping
     @GetMapping("/matricule")
     public Etudiant getEtudiantByMatricule(@PathParam("matricule") String matricule){
-        return etudiant.getEtudiantByMatricule(matricule);
+        return etudiantService.getEtudiantByMatricule(matricule);
     }
     
+    // TODO need to revise this mapping
     @GetMapping("/nomEtudiant")
     public Page<Etudiant> getEtudiantByNomEtudiant(@PathParam("nometudiant") String nomEtudiant, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
-        return etudiant.getEtudiantByNom(nomEtudiant, page, size);
+        return etudiantService.getEtudiantByNom(nomEtudiant, page, size);
     }
     
     @GetMapping()
     public List<Etudiant> getAll(){
-        return etudiant.getAll();
+        return etudiantService.getAll();
     }
     
     @PutMapping(value = "/{id}")
-    public Etudiant updateEtudiant(Etudiant etud, @PathVariable("id") int idEtudiant){
-        return etudiant.editEtudiantById(etud, idEtudiant);
+    public Etudiant updateEtudiant(Etudiant etud, @PathVariable("id") long idEtudiant){
+        return etudiantService.editEtudiantById(etud);
     }
     
     @DeleteMapping(value = "/{id}")
-    public void dropEtudiantById(@PathVariable("id") int idEtudiant){
-        etudiant.dropEtudiantById(idEtudiant);
+    public void dropEtudiantById(@PathVariable("id") long idEtudiant){
+        etudiantService.dropEtudiantById(idEtudiant);
     }
 }

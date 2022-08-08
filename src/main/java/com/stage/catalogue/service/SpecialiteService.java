@@ -33,7 +33,7 @@ public class SpecialiteService {
         return specialiteDao.findAll();
     }
     
-    public Specialite editSpecialiteById(Specialite specialite) {
+    public Specialite editSpecialite(Specialite specialite) {
         Optional<Specialite> oSpecialite = specialiteDao.findById(specialite.getId());
         if (oSpecialite.isPresent()) {
             Specialite existingSpecialite = oSpecialite.get();

@@ -1,6 +1,6 @@
 package com.stage.catalogue.controller;
 
-import com.stage.catalogue.entity.Cycle;
+import com.stage.catalogue.entity.Diplome;
 import com.stage.catalogue.entity.Memoire;
 import com.stage.catalogue.service.MemoireService;
 import javax.websocket.server.PathParam;
@@ -21,50 +21,54 @@ import org.springframework.web.bind.annotation.RestController;
  * @author cellule
  */
 @RestController
-@RequestMapping("/memoires")
+@RequestMapping("${apiPrefix}/memoires")
 
 public class MemoireController {
 
     @Autowired
-    private MemoireService memoire;
+    private MemoireService memoireService;
     
     @PostMapping()
     public Memoire addMemoire(@RequestBody Memoire memo){
-        return memoire.addMemoire(memo);
+        return memoireService.addMemoire(memo);
     }
     
     @GetMapping()
     public Page<Memoire> getAllMemoire(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
-        return memoire.findAll(page, size);
+        return memoireService.findAll(page, size);
     }
     
+    // TODO I need to revise this
     @GetMapping("/anneeValid")
     public Page<Memoire> getMemoireByAnneeValid(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("anneevalid") String anneevalid){
-        return memoire.getMemoireByAnneeValid(anneevalid, page, size);
+        return memoireService.getMemoireByAnneeValid(anneevalid, page, size);
     }
     
+    // TODO I need to revise this
     @GetMapping("/titre")
     public Page<Memoire> getMemoireByTitre(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("titre") String titre){
-        return memoire.getMemoireByTitre(titre, page, size);
+        return memoireService.getMemoireByTitre(titre, page, size);
     }
     
+    // TODO I need to revise this
     @GetMapping("/cycle")
-    public Page<Memoire> getMemoireByCycle(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("cycle") Cycle cycle){
-        return memoire.getMemoireByCycle(cycle, page, size);
+    public Page<Memoire> getMemoireByCycle(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("cycle") Diplome cycle){
+        return memoireService.getMemoireByCycle(cycle, page, size);
     }
     
+    // TODO I need to revise this
     @GetMapping("/motCle")
     public Page<Memoire> getMemoireByMotCle(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("motcle") String motcle){
-        return memoire.getMemoireByMotCle(motcle, page, size);
+        return memoireService.getMemoireByMotCle(motcle, page, size);
     }
     
     @PutMapping(value = "/{id}")
-    public Memoire updateMemoireById(Memoire memo, @PathVariable("idMemoire") int idMemoire){
-        return memoire.editMemoireById(memo, idMemoire);
+    public Memoire updateMemoireById(Memoire memo, @PathVariable("idMemoire") long idMemoire){
+        return memoireService.editMemoireById(memo);
     }
     
     @DeleteMapping(value = "/{id}")
-    public void dropMemoireById(@PathVariable("idMemoire") int idMemoire){
-        memoire.dropMemoireById(idMemoire);
+    public void dropMemoireById(@PathVariable("idMemoire") long idMemoire){
+        memoireService.dropMemoireById(idMemoire);
     }
 }

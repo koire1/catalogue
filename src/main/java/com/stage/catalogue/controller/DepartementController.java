@@ -3,6 +3,7 @@ package com.stage.catalogue.controller;
 import com.stage.catalogue.entity.Departement;
 import com.stage.catalogue.entity.Specialite;
 import com.stage.catalogue.service.DepartementService;
+import com.stage.catalogue.service.SpecialiteService;
 import java.util.List;
 import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,60 +23,67 @@ import org.springframework.web.bind.annotation.RestController;
  * @author cellule
  */
 @RestController
-@RequestMapping("/departements")
+@RequestMapping("${apiPrefix}/departements")
 
 public class DepartementController {
 
     @Autowired
-    private DepartementService departement;
+    private DepartementService departementService;
+    
+    @Autowired
+    private SpecialiteService speciateService;
 
     @PostMapping()
     public Departement addDepartement(@RequestBody Departement depart){
-        return departement.addDepartement(depart);
+        return departementService.addDepartement(depart);
     }
     
     @GetMapping("/nomdepart")
     public Page<Departement> getDepartementByNom(@PathParam("nomdepart") String nomDepart, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
-        return departement.getDepartementByNom(nomDepart, page, size);
+        return departementService.getDepartementByNom(nomDepart, page, size);
     }
     
     @GetMapping(value = "/{id}")
-    public Departement getDepartementById(@PathVariable("id") int idDepart){
-        return departement.getDepartementById(idDepart);
+    public Departement getDepartementById(@PathVariable("id") long idDepart){
+        return departementService.getDepartementById(idDepart);
     }
     
     @GetMapping(value = "/{id}/specialites")
-    public List<Specialite> listSpecialite(@PathVariable("id") int idDepart){
-        return departement.getSpecialite(idDepart);
+    public List<Specialite> listSpecialite(@PathVariable("id") long idDepart){
+        return departementService.getSpecialite(idDepart);
     }
     
+    // TODO some checks need to be performed here
     @PutMapping(value = "/{idDepart}/specialite/idSpecial")
-    public Specialite modifSpecialite(@PathVariable("idDepart") int idDepart, @PathParam("idSpecial") int id, @RequestBody Specialite special){
-        return departement.editSpecialite(idDepart, id, special);
+    public Specialite modifSpecialite(@PathVariable("idDepart") long idDepart, @PathParam("idSpecial") long id, @RequestBody Specialite special){
+        return speciateService.editSpecialite(special);
     }
     
     @PostMapping(value = "/{idDepart}/specialite")
     public Specialite ajoutSpecialite(@PathVariable("idDepart") int idDepart, @RequestBody Specialite special){
-        return departement.addSpecialite(special);
+        Departement d = departementService.getDepartementById(idDepart);
+        special.setDepartement(d);
+        return speciateService.addSpecialite(special);
     }
     
+    // TODO some checks need to be performed here
     @DeleteMapping(value = "/{id}/specialite/idSpecial")
-    public void suppSpecialite(@PathVariable("id") int idDepart, @PathParam("idSpecial") int idSpecial){
-        departement.deleteSpecialite(idSpecial);
+    public void suppSpecialite(@PathVariable("id") long idDepart, @PathParam("idSpecial") long idSpecial){
+        speciateService.deleteSpecialiteById(idSpecial);
     }
     
     @GetMapping()
     public List<Departement> getAll(){
-        return departement.getAll();
+        return departementService.getAll();
     }
     
     @PutMapping("/{id}")
-    public Departement updateDepartementById(Departement depart, @PathVariable("id") int idDepart){
-        return departement.editDepartement(depart, idDepart);
+    public Departement updateDepartementById(Departement depart, @PathVariable("id") long idDepart){
+        return departementService.editDepartement(depart);
     }
     
     @DeleteMapping(value = "/{id}")
     public void dropDepartementById(@PathVariable("id") int idDepart){
-        departement.dropDepartementById(idDepart);
+        departementService.dropDepartementById(idDepart);
     }
 }
