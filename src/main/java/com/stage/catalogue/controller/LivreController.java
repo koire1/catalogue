@@ -1,10 +1,7 @@
 package com.stage.catalogue.controller;
 
-import com.stage.catalogue.entity.Langue;
 import com.stage.catalogue.entity.Livre;
 import com.stage.catalogue.service.LivreService;
-import java.util.Date;
-import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
@@ -33,7 +30,7 @@ public class LivreController {
     public Livre addLivre(@RequestBody Livre liv){
         return livreService.addLivre(liv);
     }
-    
+    /*
     // TODO I need to revise this
     @GetMapping
     public Livre getLivreByIsbn(@PathParam("isbn") String isbn){
