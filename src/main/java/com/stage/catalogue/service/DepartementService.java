@@ -1,7 +1,6 @@
 package com.stage.catalogue.service;
 
 import com.stage.catalogue.dao.DepartementDao;
-import com.stage.catalogue.dao.SpecialiteDao;
 import com.stage.catalogue.entity.Departement;
 import com.stage.catalogue.entity.Specialite;
 import java.util.List;

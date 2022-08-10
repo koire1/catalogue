@@ -5,7 +5,9 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -14,6 +16,8 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "utilisateur")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Utilisateur implements Serializable{
     
     @Id
@@ -25,7 +29,6 @@ public class Utilisateur implements Serializable{
     @Column(name = "username", nullable = false, unique = true)
     private String username;
     
-    @Transient
     @JsonIgnore
     @NotNull
     @Column(name = "password", nullable = false)
@@ -44,9 +47,12 @@ public class Utilisateur implements Serializable{
     @Column(name = "email", nullable = false, unique = true)
     private String email;
     
-    @Transient
     @JsonIgnore
     @Column(name= "enabled", columnDefinition = "tinyint(1) default 0")
     private boolean enabled;
+    
+    @JsonIgnore
+    @Column(name= "locked", columnDefinition = "tinyint(1) default 0")
+    private boolean locked;
 
 }

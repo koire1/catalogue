@@ -1,6 +1,7 @@
 package com.stage.catalogue.controller;
 
 import com.stage.catalogue.entity.Utilisateur;
+import com.stage.catalogue.security.CurrentUser;
 import com.stage.catalogue.service.UtilisateurService;
 import java.util.List;
 import javax.websocket.server.PathParam;
@@ -41,23 +42,11 @@ public class UtilisateurController {
         return utilisateurService.getAll();
     }
     
-    // TODO I need a better way to deal with this
-//    @PostMapping(value = "/login")
-//    public Utilisateur loginUtilisateur(@RequestBody Utilisateur util)
-//    throws Exception{
-//            String tempNom = util.getName();
-//            String tempPassword = util.getPassword();
-//            //Role tempLogin = util.getLogin();
-//            Utilisateur utilObject = null;
-//            
-////            if(tempPassword != null && tempNom != null){
-////                utilObject = utilisateur.getUtilisateurByNameAndPasswordAndLogin(tempNom, tempPassword, tempLogin);
-////           }if(utilObject == null){
-////               throw new Exception("Bad credentials");
-////           }
-//           return utilObject;
-//    }
-    
+    @GetMapping("/current")
+    public Utilisateur currentUser(@CurrentUser Utilisateur utilisateur){
+        return utilisateur;
+    }
+
     @PutMapping(value = "/{id}")
     public Utilisateur updateUtilisateur(Utilisateur util, @PathVariable("id") long idUtilisateur){
         return utilisateurService.editUtilisateur(util);

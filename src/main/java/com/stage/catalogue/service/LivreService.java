@@ -1,7 +1,6 @@
 package com.stage.catalogue.service;
 
 import com.stage.catalogue.dao.LivreDao;
-import com.stage.catalogue.entity.Auteur;
 import com.stage.catalogue.entity.Langue;
 import com.stage.catalogue.entity.Livre;
 import java.util.Date;
