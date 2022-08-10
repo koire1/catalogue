@@ -28,7 +28,7 @@ public class CategorieController {
     @Autowired
     private CategorieService categorieService;
     
-    @PostMapping()
+    @PostMapping
     public Categorie addCategorie(@RequestBody Categorie cat){
         return categorieService.addCategorie(cat);
     }
@@ -39,7 +39,7 @@ public class CategorieController {
     }
     
     // TODO revision needed here
-    @GetMapping("/nomcategorie")
+    @GetMapping
     public Page<Categorie> getCategorieByNom(@PathParam("nomcategorie") String nomCategorie, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
         return categorieService.getCategorieByNom(nomCategorie, page, size);
     }

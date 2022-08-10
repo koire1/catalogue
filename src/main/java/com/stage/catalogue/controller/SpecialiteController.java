@@ -31,7 +31,7 @@ public class SpecialiteController {
     }
     
     // TODO I need to revise this
-    @GetMapping("/nomspecialite")
+    @GetMapping
     public Specialite getSpecialiteByNomSpecialite(@PathParam("nomspecialite") String nomSpecialite){
         return specialiteService.getSpecialiteByNomSpecialite(nomSpecialite);
     }

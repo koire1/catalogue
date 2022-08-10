@@ -29,14 +29,14 @@ public class UtilisateurController {
     public Utilisateur addUtilisateur(@RequestBody Utilisateur util){
         return utilisateurService.addUtilisateur(util);
     }
-    
+    /*
     // TODO I need to revise this
-    @GetMapping("/name")
+    @GetMapping
     public Utilisateur getUtilisateurByName(@PathParam("name") String name){
         // return utilisateurService.getUtilisateurByName(name);
         return null;
     }
-    
+    */
     @GetMapping
     public List<Utilisateur> getAll(){
         return utilisateurService.getAll();

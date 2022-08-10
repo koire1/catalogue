@@ -39,7 +39,7 @@ public class AuteurController {
     }
     
     // TODO ce mapping n'est pas correct
-    @GetMapping(value = "/nomAuteur")
+    @GetMapping
     public Page<Auteur> getAuteurByNom(@PathParam("nomauteur") String nomAuteur, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
         return auteur.getAuteurByNom(nomAuteur, page, size);
     }

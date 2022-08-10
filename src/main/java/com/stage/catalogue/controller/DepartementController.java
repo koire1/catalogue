@@ -33,12 +33,12 @@ public class DepartementController {
     @Autowired
     private SpecialiteService speciateService;
 
-    @PostMapping()
+    @PostMapping
     public Departement addDepartement(@RequestBody Departement depart){
         return departementService.addDepartement(depart);
     }
     
-    @GetMapping("/nomdepart")
+    @GetMapping
     public Page<Departement> getDepartementByNom(@PathParam("nomdepart") String nomDepart, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
         return departementService.getDepartementByNom(nomDepart, page, size);
     }
@@ -54,7 +54,7 @@ public class DepartementController {
     }
     
     // TODO some checks need to be performed here
-    @PutMapping(value = "/{idDepart}/specialite/idSpecial")
+    @PutMapping(value = "/{idDepart}/specialite")
     public Specialite modifSpecialite(@PathVariable("idDepart") long idDepart, @PathParam("idSpecial") long id, @RequestBody Specialite special){
         return speciateService.editSpecialite(special);
     }
@@ -67,7 +67,7 @@ public class DepartementController {
     }
     
     // TODO some checks need to be performed here
-    @DeleteMapping(value = "/{id}/specialite/idSpecial")
+    @DeleteMapping(value = "/{id}/specialite")
     public void suppSpecialite(@PathVariable("id") long idDepart, @PathParam("idSpecial") long idSpecial){
         speciateService.deleteSpecialiteById(idSpecial);
     }
