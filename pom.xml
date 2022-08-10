@@ -13,7 +13,7 @@
     <artifactId>catalogue</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>catalogue</name>
-    <description>Catalogue numérique des ouvrqges d'un centre de documentqtion</description>
+    <description>Catalogue numérique des ouvrqges d'un centre de documentation</description>
     <properties>
         <java.version>11</java.version>
         <packaging.type>jar</packaging.type>

@@ -30,7 +30,7 @@ public class UtilisateurController {
     }
     
     // TODO I need to revise this
-    @GetMapping("/name")
+    @GetMapping
     public Utilisateur getUtilisateurByName(@PathParam("name") String name){
         // return utilisateurService.getUtilisateurByName(name);
         return null;

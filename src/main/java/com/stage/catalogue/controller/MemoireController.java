@@ -39,25 +39,25 @@ public class MemoireController {
     }
     
     // TODO I need to revise this
-    @GetMapping("/anneeValid")
+    @GetMapping
     public Page<Memoire> getMemoireByAnneeValid(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("anneevalid") String anneevalid){
         return memoireService.getMemoireByAnneeValid(anneevalid, page, size);
     }
     
     // TODO I need to revise this
-    @GetMapping("/titre")
+    @GetMapping
     public Page<Memoire> getMemoireByTitre(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("titre") String titre){
         return memoireService.getMemoireByTitre(titre, page, size);
     }
     
     // TODO I need to revise this
-    @GetMapping("/cycle")
+    @GetMapping
     public Page<Memoire> getMemoireByCycle(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("cycle") Diplome cycle){
         return memoireService.getMemoireByCycle(cycle, page, size);
     }
     
     // TODO I need to revise this
-    @GetMapping("/motCle")
+    @GetMapping
     public Page<Memoire> getMemoireByMotCle(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("motcle") String motcle){
         return memoireService.getMemoireByMotCle(motcle, page, size);
     }

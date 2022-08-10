@@ -35,31 +35,31 @@ public class LivreController {
     }
     
     // TODO I need to revise this
-    @GetMapping(value = "/isbn")
+    @GetMapping
     public Livre getLivreByIsbn(@PathParam("isbn") String isbn){
         return livreService.getLivreByIsbn(isbn);
     }
     
     // TODO I need to revise this
-    @GetMapping(value = "/titre")
+    @GetMapping
     public Page<Livre> getLivreByTitre(@PathParam("titre") String titre, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
         return livreService.getLivreByTitre(titre, page, size);
     }
     
     // TODO I need to revise this
-    @GetMapping(value = "/cote")
+    @GetMapping
     public Livre getLivreByCote(@PathParam("cote") String cote){
         return livreService.getLivreByCote(cote);
     }
     
     // TODO I need to revise this
-    @GetMapping(value = "/anneePub")
+    @GetMapping
     public Page<Livre> getLivreByAnneePub(@PathParam("anneepub") Date anneepub, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
         return livreService.getLivreByAnneePub(anneepub, page, size);
     }
     
     // TODO I need to revise this
-    @GetMapping(value = "/maisonEdit")
+    @GetMapping
     public Page<Livre> getLivreByMaisonEdit(@PathParam("maisonedit") String maisonedit, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
         return livreService.getLivreByMaisonEdit(maisonedit, page, size);
     }
@@ -71,7 +71,7 @@ public class LivreController {
     }
     
     // TODO I need to revise this
-    @GetMapping(value = "/langue")
+    @GetMapping
     public Page<Livre> getLivreByLangue(@PathParam("langue") Langue langue, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
         return livreService.getLivreByLangue(langue, page, size);
     }

@@ -34,13 +34,13 @@ public class EtudiantController {
     }
     
     // TODO need to revise this mapping
-    @GetMapping("/matricule")
+    @GetMapping
     public Etudiant getEtudiantByMatricule(@PathParam("matricule") String matricule){
         return etudiantService.getEtudiantByMatricule(matricule);
     }
     
     // TODO need to revise this mapping
-    @GetMapping("/nomEtudiant")
+    @GetMapping
     public Page<Etudiant> getEtudiantByNomEtudiant(@PathParam("nometudiant") String nomEtudiant, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
         return etudiantService.getEtudiantByNom(nomEtudiant, page, size);
     }
