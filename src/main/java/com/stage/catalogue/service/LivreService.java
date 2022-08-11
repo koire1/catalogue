@@ -1,7 +1,6 @@
 package com.stage.catalogue.service;
 
 import com.stage.catalogue.dao.LivreDao;
-import com.stage.catalogue.entity.Auteur;
 import com.stage.catalogue.entity.Langue;
 import com.stage.catalogue.entity.Livre;
 import java.util.Date;
@@ -74,6 +73,14 @@ public class LivreService {
             return livreDao.save(existingLivre);
         }
         return null;
+    }
+    
+    public Page<Livre> getByNomAuteur(String nomAuteur, int page, int size){
+        return livreDao.findByNomAuteur(nomAuteur, PageRequest.of(page, size));
+    }
+    
+    public Page<Livre> getByNomCategorie(String nomCategorie, int page, int size){
+        return livreDao.findByNomCategorie(nomCategorie, PageRequest.of(page, size));
     }
 
     public void dropLivreById(long idLivre) {

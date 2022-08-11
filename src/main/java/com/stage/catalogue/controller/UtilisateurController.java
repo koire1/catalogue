@@ -1,8 +1,8 @@
 package com.stage.catalogue.controller;
 
 import com.stage.catalogue.dao.UtilisateurDao;
-import com.stage.catalogue.entity.Role;
 import com.stage.catalogue.entity.Utilisateur;
+import com.stage.catalogue.security.CurrentUser;
 import com.stage.catalogue.service.UtilisateurService;
 import java.util.List;
 import java.util.Objects;
@@ -35,8 +35,7 @@ public class UtilisateurController {
         return utilisateurService.addUtilisateur(util);
     }
     
-    // TODO I need to revise this
-    @GetMapping
+    @GetMapping()
     public Optional<Utilisateur> getUtilisateurByName(@PathParam("name") String name){
         return utilisateurService.getUtilisateurByUsername(name);
     }
@@ -46,7 +45,6 @@ public class UtilisateurController {
         return utilisateurService.getAll();
     }
     
-//   TODO I need a better way to deal with this
     @PostMapping(value = "/login")
     public Utilisateur loginUtilisateur(@RequestBody Utilisateur util)
         throws Exception{
@@ -57,6 +55,11 @@ public class UtilisateurController {
         return user;
     }
     
+    @GetMapping("/current")
+    public Utilisateur currentUser(@CurrentUser Utilisateur utilisateur){
+        return utilisateur;
+    }
+
     @PutMapping(value = "/{id}")
     public Utilisateur updateUtilisateur(Utilisateur util, @PathVariable("id") long idUtilisateur){
         return utilisateurService.editUtilisateur(util, idUtilisateur);

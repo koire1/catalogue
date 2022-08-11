@@ -50,7 +50,7 @@ public class DiplomeController {
         diplomeService.delete(id);
     }
     
-    @GetMapping
+    @GetMapping()
     public Page<Diplome> find(@RequestParam(value = "page", defaultValue = "0")int page, 
                               @RequestParam(value = "size", defaultValue = "15")int size){
         return diplomeService.findAll(page, size);

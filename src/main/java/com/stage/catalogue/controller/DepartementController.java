@@ -37,9 +37,8 @@ public class DepartementController {
     public Departement addDepartement(@RequestBody Departement depart){
         return departementService.addDepartement(depart);
     }
-    
-    @GetMapping
-    public Page<Departement> getDepartementByNom(@PathParam("nomdepart") String nomDepart, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
+    @GetMapping(value = "/{nomdepart}")
+    public Page<Departement> getDepartementByNom(@PathVariable("nomdepart") String nomDepart, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
         return departementService.getDepartementByNom(nomDepart, page, size);
     }
     
@@ -53,9 +52,8 @@ public class DepartementController {
         return departementService.getSpecialite(idDepart);
     }
     
-    // TODO some checks need to be performed here
-    @PutMapping(value = "/{idDepart}/specialite")
-    public Specialite modifSpecialite(@PathVariable("idDepart") long idDepart, @PathParam("idSpecial") long id, @RequestBody Specialite special){
+    @PutMapping(value = "/{idDepart}/specialite/{idSpecial}")
+    public Specialite modifSpecialite(@PathVariable("idDepart") long idDepart, @PathVariable("idSpecial") long id, @RequestBody Specialite special){
         return speciateService.editSpecialite(special);
     }
     
@@ -66,8 +64,9 @@ public class DepartementController {
         return speciateService.addSpecialite(special);
     }
     
-    // TODO some checks need to be performed here
-    @DeleteMapping(value = "/{id}/specialite")
+    // TODO some checks need to be performed here, voilà ce que j'attendais: api/departements/1/specialite?idSpecial=
+    // à moins que vous me suggeriez d'utiliser des PathVariable
+    @DeleteMapping(value = "/{id}/specialite/{idSpecial}")
     public void suppSpecialite(@PathVariable("id") long idDepart, @PathParam("idSpecial") long idSpecial){
         speciateService.deleteSpecialiteById(idSpecial);
     }

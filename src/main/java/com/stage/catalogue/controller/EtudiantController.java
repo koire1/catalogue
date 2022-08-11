@@ -3,7 +3,6 @@ package com.stage.catalogue.controller;
 import com.stage.catalogue.entity.Etudiant;
 import com.stage.catalogue.service.EtudiantService;
 import java.util.List;
-import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
@@ -33,18 +32,16 @@ public class EtudiantController {
         return etudiantService.addEtudiant(etud);
     }
     
-    // TODO need to revise this mapping
-    @GetMapping
-    public Etudiant getEtudiantByMatricule(@PathParam("matricule") String matricule){
+    @GetMapping(value = "/{matricule}")
+    public Etudiant getEtudiantByMatricule(@PathVariable("matricule") String matricule){
         return etudiantService.getEtudiantByMatricule(matricule);
     }
     
-    // TODO need to revise this mapping
-    @GetMapping
-    public Page<Etudiant> getEtudiantByNomEtudiant(@PathParam("nometudiant") String nomEtudiant, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
+    @GetMapping(value = "/{nometudiant}")
+    public Page<Etudiant> getEtudiantByNomEtudiant(@PathVariable("nometudiant") String nomEtudiant, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
         return etudiantService.getEtudiantByNom(nomEtudiant, page, size);
     }
-    
+   
     @GetMapping()
     public List<Etudiant> getAll(){
         return etudiantService.getAll();

@@ -38,9 +38,8 @@ public class CategorieController {
         return categorieService.getCategorieById(idCategorie);
     }
     
-    // TODO revision needed here
-    @GetMapping
-    public Page<Categorie> getCategorieByNom(@PathParam("nomcategorie") String nomCategorie, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
+    @GetMapping(value = "/{nomcategorie}")
+    public Page<Categorie> getCategorieByNom(@PathVariable("nomcategorie") String nomCategorie, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
         return categorieService.getCategorieByNom(nomCategorie, page, size);
     }
     

@@ -29,5 +29,9 @@ public interface LivreDao extends JpaRepository<Livre, Long> {
     public Page<Livre> findByTitreLikeAndLangue(String titre, Langue langue, Pageable pageable);
 
     public Page<Livre> findByLangue(Langue langue, Pageable pageable);
+    
+    public Page<Livre> findByNomAuteur(String nomAuteur, Pageable pageable);
+    
+    public Page<Livre> findByNomCategorie(String nomCategorie, Pageable pageable);
 
 }

@@ -3,7 +3,6 @@ package com.stage.catalogue.controller;
 import com.stage.catalogue.entity.Specialite;
 import com.stage.catalogue.service.SpecialiteService;
 import java.util.List;
-import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,9 +29,8 @@ public class SpecialiteController {
         return specialiteService.addSpecialite(special);
     }
     
-    // TODO I need to revise this
-    @GetMapping
-    public Specialite getSpecialiteByNomSpecialite(@PathParam("nomspecialite") String nomSpecialite){
+    @GetMapping(value = "/{nomspecialite}")
+    public Specialite getSpecialiteByNomSpecialite(@PathVariable("nomspecialite") String nomSpecialite){
         return specialiteService.getSpecialiteByNomSpecialite(nomSpecialite);
     }
     

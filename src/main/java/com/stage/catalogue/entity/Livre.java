@@ -44,7 +44,6 @@ public class Livre implements Serializable{
     @Column(name = "isbn", nullable = false)
     private String isbn;
     
-    // TODO Il faut revoir ce cas
     @Column(nullable = false, length = 1024*1024*30)
     byte[] file;
     

@@ -38,9 +38,9 @@ public class AuteurController {
         return auteur.getAuteurById(idAuteur);
     }
     
-    // TODO ce mapping n'est pas correct
-    @GetMapping
-    public Page<Auteur> getAuteurByNom(@PathParam("nomauteur") String nomAuteur, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
+    // TODO ce mapping n'est pas correct. Voilà le résultat que je voulais: api/auteurs?nomAuteur=""&page=&size=
+    @GetMapping(value = "/{nomauteur}")
+    public Page<Auteur> getAuteurByNom(@PathVariable("nomauteur") String nomAuteur, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
         return auteur.getAuteurByNom(nomAuteur, page, size);
     }
     
