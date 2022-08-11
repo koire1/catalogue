@@ -4,7 +4,6 @@ import com.stage.catalogue.entity.Utilisateur;
 import com.stage.catalogue.security.CurrentUser;
 import com.stage.catalogue.service.UtilisateurService;
 import java.util.List;
-import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
