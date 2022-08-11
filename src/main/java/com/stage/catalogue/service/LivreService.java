@@ -70,7 +70,7 @@ public class LivreService {
             existingLivre.setMaisonEdition(livre.getMaisonEdition());
             existingLivre.setNombrePages(livre.getNombrePages());
             existingLivre.setTitre(livre.getTitre());
-            existingLivre.setImage(livre.getImage());
+            existingLivre.setFile(livre.getImage().getBytes());
             return livreDao.save(existingLivre);
         }
         return null;

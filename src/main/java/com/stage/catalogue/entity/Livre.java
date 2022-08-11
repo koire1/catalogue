@@ -45,8 +45,17 @@ public class Livre implements Serializable{
     private String isbn;
     
     // TODO Il faut revoir ce cas
-    @Column(name = "image", nullable = false)
-     private String image;
+    @Column(nullable = false, length = 1024*1024*30)
+    byte[] file;
+    
+    @Transient
+    String image;
+    
+    public void updateImage(){
+        this.image = new String(file);
+        this.file = null;
+    }
+
     
     
     @ManyToMany

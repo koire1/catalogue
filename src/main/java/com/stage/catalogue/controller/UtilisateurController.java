@@ -1,8 +1,12 @@
 package com.stage.catalogue.controller;
 
+import com.stage.catalogue.dao.UtilisateurDao;
+import com.stage.catalogue.entity.Role;
 import com.stage.catalogue.entity.Utilisateur;
 import com.stage.catalogue.service.UtilisateurService;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +27,8 @@ public class UtilisateurController {
     
     @Autowired
     private UtilisateurService utilisateurService;
+    @Autowired
+    private UtilisateurDao utilisateur;
     
     @PostMapping()
     public Utilisateur addUtilisateur(@RequestBody Utilisateur util){
@@ -31,9 +37,8 @@ public class UtilisateurController {
     
     // TODO I need to revise this
     @GetMapping
-    public Utilisateur getUtilisateurByName(@PathParam("name") String name){
-        // return utilisateurService.getUtilisateurByName(name);
-        return null;
+    public Optional<Utilisateur> getUtilisateurByName(@PathParam("name") String name){
+        return utilisateurService.getUtilisateurByUsername(name);
     }
     
     @GetMapping
@@ -42,25 +47,19 @@ public class UtilisateurController {
     }
     
 //   TODO I need a better way to deal with this
-//    @PostMapping(value = "/login")
-//    public Utilisateur loginUtilisateur(@RequestBody Utilisateur util)
-//    throws Exception{
-//            String tempNom = util.getName();
-//            String tempPassword = util.getPassword();
-//            //Role tempLogin = util.getLogin();
-//            Utilisateur utilObject = null;
-//            
-////            if(tempPassword != null && tempNom != null){
-////                utilObject = utilisateur.getUtilisateurByNameAndPasswordAndLogin(tempNom, tempPassword, tempLogin);
-////           }if(utilObject == null){
-////               throw new Exception("Bad credentials");
-////           }
-//           return utilObject;
-//    }
+    @PostMapping(value = "/login")
+    public Utilisateur loginUtilisateur(@RequestBody Utilisateur util)
+        throws Exception{
+        Objects.requireNonNull(util.getUsername());
+        Objects.requireNonNull(util.getPassword());
+        Objects.requireNonNull(util.getRole());
+        Utilisateur user = utilisateur.findByNameAndPasswordAndRole(util.getUsername(), util.getPassword(), util.getRole());
+        return user;
+    }
     
     @PutMapping(value = "/{id}")
     public Utilisateur updateUtilisateur(Utilisateur util, @PathVariable("id") long idUtilisateur){
-        return utilisateurService.editUtilisateur(util);
+        return utilisateurService.editUtilisateur(util, idUtilisateur);
     }
     
     @DeleteMapping(value = "/{id}")

@@ -25,19 +25,33 @@ public class UtilisateurService {
         return utilisateurDao.findAll();
 
     }
+    
+    public Optional<Utilisateur> getUtilisateurByUsername(String username){
+        return utilisateurDao.findByUsername(username);
+    }
 
-    public Utilisateur editUtilisateur(Utilisateur utilisateur) {
+    public Utilisateur editUtilisateur(Utilisateur utilisateur, Long id) {
 
-        Optional<Utilisateur> oUtilisateur = utilisateurDao.findById(utilisateur.getId());
+        Optional<Utilisateur> oUtilisateur = utilisateurDao.findById(id);
         if (oUtilisateur.isPresent()) {
             Utilisateur existingUtilisateur = oUtilisateur.get();
             existingUtilisateur.setName(utilisateur.getName());
             // TODO je ne suis pas sur que l'on modifie facilement le mot de passe ainsi
-            existingUtilisateur.setPassword(utilisateur.getPassword());
+            existingUtilisateur.setPassword(editPassword(existingUtilisateur.getPassword(), utilisateur.getPassword()));
             existingUtilisateur.setEmail(utilisateur.getEmail());
             existingUtilisateur.setRole(utilisateur.getRole());
             existingUtilisateur.setUsername(utilisateur.getUsername());
             return utilisateurDao.save(existingUtilisateur);
+        }
+        return null;
+    }
+    
+    public String editPassword(String password, String newPassword){
+        Optional<Utilisateur> user = utilisateurDao.findByPassword(password);
+        if(user.isPresent() && newPassword != password){
+            Utilisateur userNew = user.get();
+            userNew.setPassword(newPassword);
+            return userNew.getPassword();
         }
         return null;
     }
