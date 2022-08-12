@@ -32,10 +32,10 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManager(), jwtUtils);
-        customAuthenticationFilter.setFilterProcessesUrl("/api/users/login");
+        customAuthenticationFilter.setFilterProcessesUrl("/api/utilisateurs/login");
         http.csrf().disable();
         http.authorizeRequests((auth) -> auth
-                .antMatchers("/api/user/login/**", "api/tokens/**", "/static/**").permitAll()
+                .antMatchers("/api/utilisateurs/login/**", "api/tokens/**", "/static/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/utilisateurs").hasAuthority(Role.ADMIN.toString())
                 .antMatchers(HttpMethod.GET, "/api/utilisateurs").hasAuthority(Role.ADMIN.toString())
                 .anyRequest().authenticated()
