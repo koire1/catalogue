@@ -28,13 +28,12 @@ public class SpecialiteController {
     public Specialite addSpecialite(@RequestBody Specialite special){
         return specialiteService.addSpecialite(special);
     }
-    /*
-    // TODO I need to revise this
-    @GetMapping
-    public Specialite getSpecialiteByNomSpecialite(@PathParam("nomspecialite") String nomSpecialite){
+    
+    @GetMapping(value = "/{nomspecialite}")
+    public Specialite getSpecialiteByNomSpecialite(@PathVariable("nomspecialite") String nomSpecialite){
         return specialiteService.getSpecialiteByNomSpecialite(nomSpecialite);
     }
-    */
+    
     @GetMapping(value = "/{id}")
     public Specialite getSpecialiteById(@PathVariable("id") long idSpecialite){
         return specialiteService.getSpecialiteById(idSpecialite);

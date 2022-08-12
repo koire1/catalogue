@@ -38,38 +38,33 @@ public class MemoireController {
         return memoireService.findAll(page, size);
     }
     
-    /*
-    // TODO I need to revise this
-    @GetMapping
-    public Page<Memoire> getMemoireByAnneeValid(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("anneevalid") String anneevalid){
+    @GetMapping(value = "/{anneevalid}")
+    public Page<Memoire> getMemoireByAnneeValid(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathVariable("anneevalid") String anneevalid){
         return memoireService.getMemoireByAnneeValid(anneevalid, page, size);
     }
     
-    // TODO I need to revise this
-    @GetMapping
-    public Page<Memoire> getMemoireByTitre(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("titre") String titre){
+    @GetMapping(value = "/{titre}")
+    public Page<Memoire> getMemoireByTitre(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathVariable("titre") String titre){
         return memoireService.getMemoireByTitre(titre, page, size);
     }
     
-    // TODO I need to revise this
-    @GetMapping
-    public Page<Memoire> getMemoireByCycle(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("cycle") Diplome cycle){
+    @GetMapping(value = "/{cycle}")
+    public Page<Memoire> getMemoireByCycle(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathVariable("cycle") Diplome cycle){
         return memoireService.getMemoireByCycle(cycle, page, size);
     }
     
-    // TODO I need to revise this
-    @GetMapping
-    public Page<Memoire> getMemoireByMotCle(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathParam("motcle") String motcle){
+    @GetMapping(value = "/{motcle}")
+    public Page<Memoire> getMemoireByMotCle(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathVariable("motcle") String motcle){
         return memoireService.getMemoireByMotCle(motcle, page, size);
     }
-    */
+   
     @PutMapping(value = "/{id}")
-    public Memoire updateMemoireById(Memoire memo, @PathVariable("idMemoire") long idMemoire){
+    public Memoire updateMemoireById(Memoire memo, @PathVariable("id") long idMemoire){
         return memoireService.editMemoireById(memo);
     }
     
     @DeleteMapping(value = "/{id}")
-    public void dropMemoireById(@PathVariable("idMemoire") long idMemoire){
+    public void dropMemoireById(@PathVariable("id") long idMemoire){
         memoireService.dropMemoireById(idMemoire);
     }
 }

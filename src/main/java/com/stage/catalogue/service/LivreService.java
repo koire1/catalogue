@@ -69,10 +69,18 @@ public class LivreService {
             existingLivre.setMaisonEdition(livre.getMaisonEdition());
             existingLivre.setNombrePages(livre.getNombrePages());
             existingLivre.setTitre(livre.getTitre());
-            existingLivre.setImage(livre.getImage());
+            existingLivre.setFile(livre.getImage().getBytes());
             return livreDao.save(existingLivre);
         }
         return null;
+    }
+    
+    public Page<Livre> getByNomAuteur(String nomAuteur, int page, int size){
+        return livreDao.findByNomAuteur(nomAuteur, PageRequest.of(page, size));
+    }
+    
+    public Page<Livre> getByNomCategorie(String nomCategorie, int page, int size){
+        return livreDao.findByNomCategorie(nomCategorie, PageRequest.of(page, size));
     }
 
     public void dropLivreById(long idLivre) {

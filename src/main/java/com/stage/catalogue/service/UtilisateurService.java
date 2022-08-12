@@ -30,10 +30,14 @@ public class UtilisateurService{
         return utilisateurDao.findAll();
 
     }
+    
+    public Optional<Utilisateur> getUtilisateurByUsername(String username){
+        return utilisateurDao.findByUsername(username);
+    }
 
-    public Utilisateur editUtilisateur(Utilisateur utilisateur) {
+    public Utilisateur editUtilisateur(Utilisateur utilisateur, Long id) {
 
-        Optional<Utilisateur> oUtilisateur = utilisateurDao.findById(utilisateur.getId());
+        Optional<Utilisateur> oUtilisateur = utilisateurDao.findById(id);
         if (oUtilisateur.isPresent()) {
             Utilisateur existingUtilisateur = oUtilisateur.get();
             existingUtilisateur.setName(utilisateur.getName());
@@ -46,7 +50,17 @@ public class UtilisateurService{
         }
         return null;
     }
-
+    /*
+    public String editPassword(String password, String newPassword){
+        Optional<Utilisateur> user = utilisateurDao.findByPassword(password);
+        if(user.isPresent() && newPassword != password){
+            Utilisateur userNew = user.get();
+            userNew.setPassword(newPassword);
+            return userNew.getPassword();
+        }
+        return null;
+    }
+*/
     public void deleteById(long idUtilisateur) {
         utilisateurDao.deleteById(idUtilisateur);
     }
