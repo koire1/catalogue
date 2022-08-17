@@ -1,6 +1,5 @@
 package com.stage.catalogue.controller;
 
-import com.stage.catalogue.dao.UtilisateurDao;
 import com.stage.catalogue.entity.Utilisateur;
 import com.stage.catalogue.security.CurrentUser;
 import com.stage.catalogue.service.UtilisateurService;
@@ -17,8 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-/**
- *
+/*
  * @author cellule
  */
 @RestController
@@ -27,8 +25,6 @@ public class UtilisateurController {
     
     @Autowired
     private UtilisateurService utilisateurService;
-    @Autowired
-    private UtilisateurDao utilisateur;
     
     @PostMapping()
     public Utilisateur addUtilisateur(@RequestBody Utilisateur util){
@@ -40,12 +36,12 @@ public class UtilisateurController {
         return utilisateurService.getUtilisateurByUsername(name);
     }
     
-    @GetMapping
+    @GetMapping()
     public List<Utilisateur> getAll(){
         return utilisateurService.getAll();
     }
     
-    @PostMapping(value = "/login")
+   /* @PostMapping(value = "/login")
     public Utilisateur loginUtilisateur(@RequestBody Utilisateur util)
         throws Exception{
         Objects.requireNonNull(util.getUsername());
@@ -53,6 +49,11 @@ public class UtilisateurController {
         Objects.requireNonNull(util.getRole());
         Utilisateur user = utilisateur.findByNameAndPasswordAndRole(util.getUsername(), util.getPassword(), util.getRole());
         return user;
+    }*/
+    
+    @PutMapping(value = "/id")
+    public Utilisateur updatePassword(@PathParam("id") long id, String password, String newPassword){
+        return utilisateurService.editPassword(password, newPassword, id);
     }
     
     @GetMapping("/current")

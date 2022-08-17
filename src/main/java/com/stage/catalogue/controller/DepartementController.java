@@ -64,8 +64,6 @@ public class DepartementController {
         return speciateService.addSpecialite(special);
     }
     
-    // TODO some checks need to be performed here, voilà ce que j'attendais: api/departements/1/specialite?idSpecial=
-    // à moins que vous me suggeriez d'utiliser des PathVariable
     @DeleteMapping(value = "/{id}/specialite/{idSpecial}")
     public void suppSpecialite(@PathVariable("id") long idDepart, @PathParam("idSpecial") long idSpecial){
         speciateService.deleteSpecialiteById(idSpecial);

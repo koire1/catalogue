@@ -3,7 +3,6 @@ package com.stage.catalogue.controller;
 import com.stage.catalogue.entity.Diplome;
 import com.stage.catalogue.entity.Memoire;
 import com.stage.catalogue.service.MemoireService;
-import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
@@ -34,27 +33,27 @@ public class MemoireController {
     }
     
     @GetMapping()
-    public Page<Memoire> getAllMemoire(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
+    public Page<Memoire> getAllMemoire(@RequestParam(value = "page" , defaultValue = "0") int page, @RequestParam(value = "size" , defaultValue = "10") int size){
         return memoireService.findAll(page, size);
     }
     
     @GetMapping(value = "/{anneevalid}")
-    public Page<Memoire> getMemoireByAnneeValid(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathVariable("anneevalid") String anneevalid){
+    public Page<Memoire> getMemoireByAnneeValid(@RequestParam(value = "page" , defaultValue = "0") int page, @RequestParam(value = "size" , defaultValue = "10") int size, @PathVariable("anneevalid") String anneevalid){
         return memoireService.getMemoireByAnneeValid(anneevalid, page, size);
     }
     
     @GetMapping(value = "/{titre}")
-    public Page<Memoire> getMemoireByTitre(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathVariable("titre") String titre){
+    public Page<Memoire> getMemoireByTitre(@RequestParam(value = "page" , defaultValue = "0") int page, @RequestParam(value = "size" , defaultValue = "10") int size, @PathVariable("titre") String titre){
         return memoireService.getMemoireByTitre(titre, page, size);
     }
     
     @GetMapping(value = "/{cycle}")
-    public Page<Memoire> getMemoireByCycle(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathVariable("cycle") Diplome cycle){
+    public Page<Memoire> getMemoireByCycle(@RequestParam(value = "page" , defaultValue = "0") int page, @RequestParam(value = "size" , defaultValue = "10") int size, @PathVariable("cycle") Diplome cycle){
         return memoireService.getMemoireByCycle(cycle, page, size);
     }
     
     @GetMapping(value = "/{motcle}")
-    public Page<Memoire> getMemoireByMotCle(@DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size, @PathVariable("motcle") String motcle){
+    public Page<Memoire> getMemoireByMotCle(@RequestParam(value = "page" , defaultValue = "0") int page, @RequestParam(value = "size" , defaultValue = "10") int size, @PathVariable("motcle") String motcle){
         return memoireService.getMemoireByMotCle(motcle, page, size);
     }
    

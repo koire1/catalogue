@@ -3,7 +3,6 @@ package com.stage.catalogue.controller;
 import com.stage.catalogue.entity.Categorie;
 import com.stage.catalogue.service.CategorieService;
 import java.util.List;
-import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;

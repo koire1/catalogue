@@ -13,7 +13,10 @@ import lombok.Data;
  */
 @Entity
 @Data
-@Table(name = "livre")
+@Table(name = "livre",
+        uniqueConstraints = {
+            @UniqueConstraint(columnNames = {"isbn", "categorie_id"})
+        })
 public class Livre implements Serializable{
     
     @Id
@@ -44,17 +47,18 @@ public class Livre implements Serializable{
     @Column(name = "isbn", nullable = false)
     private String isbn;
     
-    @Column(nullable = false, length = 1024*1024*30)
-    byte[] file;
-    
     @Transient
+    @Column(nullable = false, length = 1024*1024*30)
+    byte[] image;
+    
+/*    @Transient
     String image;
     
     public void updateImage(){
         this.image = new String(file);
         this.file = null;
     }
-
+*/
     
     
     @ManyToMany
@@ -66,7 +70,7 @@ public class Livre implements Serializable{
     
     @NotNull
     @ManyToOne(optional = false)
-    @JoinColumn(name="categorie_id")
+    @JoinColumn(name="categorie_id",nullable = false)
     private Categorie categorie;
    
 }

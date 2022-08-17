@@ -38,11 +38,10 @@ public class UtilisateurService{
     public Utilisateur editUtilisateur(Utilisateur utilisateur, Long id) {
 
         Optional<Utilisateur> oUtilisateur = utilisateurDao.findById(id);
+        
         if (oUtilisateur.isPresent()) {
             Utilisateur existingUtilisateur = oUtilisateur.get();
             existingUtilisateur.setName(utilisateur.getName());
-            // TODO je ne suis pas sur que l'on modifie facilement le mot de passe ainsi
-            existingUtilisateur.setPassword(passwordEncoder.encode(utilisateur.getPassword()));
             existingUtilisateur.setEmail(utilisateur.getEmail());
             existingUtilisateur.setRole(utilisateur.getRole());
             existingUtilisateur.setUsername(utilisateur.getUsername());
@@ -50,17 +49,23 @@ public class UtilisateurService{
         }
         return null;
     }
-    /*
-    public String editPassword(String password, String newPassword){
-        Optional<Utilisateur> user = utilisateurDao.findByPassword(password);
-        if(user.isPresent() && newPassword != password){
+   
+    public Utilisateur editPassword(String password, String newPassword, Long id){
+        
+        Optional<Utilisateur> user = utilisateurDao.findById(id);
+        String temp = user.get().getPassword();
+        
+        if(user.isPresent() && password.equalsIgnoreCase(temp)){
+            
             Utilisateur userNew = user.get();
-            userNew.setPassword(newPassword);
-            return userNew.getPassword();
+            userNew.setPassword(passwordEncoder.encode(newPassword));
+            return utilisateurDao.save(userNew);
+            
         }
+        
         return null;
     }
-*/
+
     public void deleteById(long idUtilisateur) {
         utilisateurDao.deleteById(idUtilisateur);
     }

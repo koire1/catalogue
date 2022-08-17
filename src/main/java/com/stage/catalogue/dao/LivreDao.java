@@ -1,6 +1,8 @@
 package com.stage.catalogue.dao;
 
 import com.stage.catalogue.entity.Langue;
+import com.stage.catalogue.entity.Auteur;
+import com.stage.catalogue.entity.Categorie;
 import org.springframework.stereotype.Repository;
 import com.stage.catalogue.entity.Livre;
 import java.util.Date;
