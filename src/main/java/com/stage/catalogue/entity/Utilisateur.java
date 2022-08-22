@@ -1,6 +1,7 @@
 package com.stage.catalogue.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -29,7 +30,7 @@ public class Utilisateur implements Serializable{
     @Column(name = "username", nullable = false, unique = true)
     private String username;
     
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @NotNull
     @Column(name = "password", nullable = false)
     private String password;
