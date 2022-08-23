@@ -33,7 +33,7 @@ public class DiplomeService {
         return null;
     }
     
-    public void delete(long id){
+    public void delete(Long id){
         diplomeDao.deleteById(id);
     }
     
@@ -41,7 +41,7 @@ public class DiplomeService {
         return diplomeDao.findAll(PageRequest.of(page, size));
     }
     
-    public Optional<Diplome> findById(long id){
+    public Optional<Diplome> findById(Long id){
         return diplomeDao.findById(id);
     }
 }

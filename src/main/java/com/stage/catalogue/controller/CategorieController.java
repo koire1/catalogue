@@ -2,9 +2,9 @@ package com.stage.catalogue.controller;
 
 import com.stage.catalogue.entity.Categorie;
 import com.stage.catalogue.service.CategorieService;
+import com.stage.catalogue.entity.Livre;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,12 +33,12 @@ public class CategorieController {
     }
     
     @GetMapping(value = "/{id}")
-    public Categorie getCategorieById(@PathVariable("id") long idCategorie){
+    public Categorie getCategorieById(@PathVariable("id") Long idCategorie){
         return categorieService.getCategorieById(idCategorie);
     }
     
     @GetMapping(value = "/{nomcategorie}")
-    public Page<Categorie> getCategorieByNom(@PathVariable("nomcategorie") String nomCategorie, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
+    public Page<Categorie> getCategorieByNom(@PathVariable("nomcategorie") String nomCategorie, @RequestParam(value = "page" , defaultValue = "0") int page, @RequestParam(value = "size" , defaultValue = "0") int size){
         return categorieService.getCategorieByNom(nomCategorie, page, size);
     }
     
@@ -48,12 +48,17 @@ public class CategorieController {
     }
     
     @PutMapping("/{id}")
-    public Categorie updateCategorie(Categorie cat, @PathVariable("id") long idCategorie){
+    public Categorie updateCategorie(Categorie cat, @PathVariable("id") Long idCategorie){
         return categorieService.editCategorieById(cat);
     }
     
     @DeleteMapping(value = "/{id}")
-    public void dropCategorie(@PathVariable("id") long idCategorie){
+    public void dropCategorie(@PathVariable("id") Long idCategorie){
         categorieService.dropCategorieById(idCategorie);
+    }
+    
+    @GetMapping(value = "/{nomcategorie}/livres")
+    public List<Livre> getLivres(@PathVariable("nomcategorie") String nomCategorie){
+        return categorieService.getLivres(nomCategorie);
     }
 }

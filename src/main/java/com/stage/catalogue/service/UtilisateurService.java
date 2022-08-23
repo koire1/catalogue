@@ -50,7 +50,7 @@ public class UtilisateurService{
         return null;
     }
    
-    public Utilisateur editPassword(String password, String newPassword, Long id){
+    public Utilisateur editPassword(String password, String newPassword, long id){
         
         Optional<Utilisateur> user = utilisateurDao.findById(id);
         String temp = user.get().getPassword();
@@ -66,7 +66,7 @@ public class UtilisateurService{
         return null;
     }
 
-    public void deleteById(long idUtilisateur) {
+    public void deleteById(Long idUtilisateur) {
         utilisateurDao.deleteById(idUtilisateur);
     }
     

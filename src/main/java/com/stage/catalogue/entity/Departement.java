@@ -14,7 +14,7 @@ import lombok.Data;
  */
 @Entity
 @Data
-@Table(name = "departement")
+//@Table(name = "departement")
 public class Departement implements Serializable{
     
     @Id

@@ -24,7 +24,7 @@ public class DepartementService {
         return departementDao.save(departement);
     }
     
-    public Departement getDepartementById(long idDepart) {
+    public Departement getDepartementById(Long idDepart) {
         return departementDao.findById(idDepart).orElse(null);
     }
     
@@ -32,7 +32,7 @@ public class DepartementService {
         return departementDao.findByNomLike(nomDepart, PageRequest.of(page, size));
     }
     
-    public List<Specialite> getSpecialite(long idDepart) {
+    public List<Specialite> getSpecialite(Long idDepart) {
         Optional<Departement> oDepartement = departementDao.findById(idDepart);
         if (oDepartement.isPresent()) {
             return oDepartement.get().getSpecialites();
@@ -56,7 +56,7 @@ public class DepartementService {
         return null;
     }
     
-    public void dropDepartementById(long idDepart) {
+    public void dropDepartementById(Long idDepart) {
         departementDao.deleteById(idDepart);
     }
     

@@ -6,13 +6,10 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.stage.catalogue.entity.Role;
 import com.stage.catalogue.security.TokenType;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 /**
@@ -32,7 +29,7 @@ public class JwtUtils {
     private long access_expiry;
 
     @Value("#{${catalogue.refresh_expiry}}")
-    private long refresh_expiry;
+    private long refresh_expiry[];
 
     public String createAccessToken(String username, Role role) {
         Algorithm algorithm = Algorithm.HMAC256(jwtSecret.getBytes());
@@ -46,11 +43,11 @@ public class JwtUtils {
     }
 
     public String createRefreshToken(String username) {
-        System.out.println("Hello "+refresh_expiry);
+        System.out.println("Hello "+refresh_expiry[5]);
         Algorithm algorithm = Algorithm.HMAC256(jwtSecret.getBytes());
         return JWT.create()
                 .withSubject(username)
-                .withExpiresAt(new Date(System.currentTimeMillis() + refresh_expiry))
+                .withExpiresAt(new Date(System.currentTimeMillis() + refresh_expiry[5]))
                 .withIssuer(jwtIssuer)
                 .withClaim("type", TokenType.REFRESH.toString())
                 .sign(algorithm);

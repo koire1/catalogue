@@ -25,7 +25,7 @@ public class SpecialiteService {
         return specialiteDao.findByCode(code).orElse(null);
     }
     
-    public Specialite getSpecialiteById(long idSpecialite) {
+    public Specialite getSpecialiteById(Long idSpecialite) {
         return specialiteDao.findById(idSpecialite).orElse(null);
     }
     
@@ -45,7 +45,7 @@ public class SpecialiteService {
         return null;
     }
     
-    public void deleteSpecialiteById(long idSpecialite) {
+    public void deleteSpecialiteById(Long idSpecialite) {
         specialiteDao.deleteById(idSpecialite);
     }
 }

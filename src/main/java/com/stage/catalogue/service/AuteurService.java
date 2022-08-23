@@ -2,6 +2,7 @@ package com.stage.catalogue.service;
 
 import com.stage.catalogue.dao.AuteurDao;
 import com.stage.catalogue.entity.Auteur;
+import com.stage.catalogue.entity.Livre;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class AuteurService {
         return auteurDao.save(aut);
     }
 
-    public Auteur getAuteurById(long idAuteur) {
+    public Auteur getAuteurById(Long idAuteur) {
         return auteurDao.findById(idAuteur).orElse(null);
     }
 
@@ -45,7 +46,16 @@ public class AuteurService {
         return null;
     }
 
-    public void dropAuteurById(long idAuteur) {
+    public void dropAuteurById(Long idAuteur) {
         auteurDao.deleteById(idAuteur);
+    }
+    
+    public List<Livre> getLivres(String nomAuteur){
+        Optional<Auteur> oAuteur = auteurDao.findAuteurByNomAuteur(nomAuteur);
+        
+        if(oAuteur.isPresent()){
+            return oAuteur.get().getLivres();
+        }
+        return null;
     }
 }

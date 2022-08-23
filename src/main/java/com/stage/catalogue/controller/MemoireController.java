@@ -4,7 +4,6 @@ import com.stage.catalogue.entity.Diplome;
 import com.stage.catalogue.entity.Memoire;
 import com.stage.catalogue.service.MemoireService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,12 +57,12 @@ public class MemoireController {
     }
    
     @PutMapping(value = "/{id}")
-    public Memoire updateMemoireById(Memoire memo, @PathVariable("id") long idMemoire){
+    public Memoire updateMemoireById(Memoire memo, @PathVariable("id") Long idMemoire){
         return memoireService.editMemoireById(memo);
     }
     
     @DeleteMapping(value = "/{id}")
-    public void dropMemoireById(@PathVariable("id") long idMemoire){
+    public void dropMemoireById(@PathVariable("id") Long idMemoire){
         memoireService.dropMemoireById(idMemoire);
     }
 }

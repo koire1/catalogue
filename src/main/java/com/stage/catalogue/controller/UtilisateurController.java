@@ -4,7 +4,6 @@ import com.stage.catalogue.entity.Utilisateur;
 import com.stage.catalogue.security.CurrentUser;
 import com.stage.catalogue.service.UtilisateurService;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,18 +40,19 @@ public class UtilisateurController {
         return utilisateurService.getAll();
     }
     
-   /* @PostMapping(value = "/login")
-    public Utilisateur loginUtilisateur(@RequestBody Utilisateur util)
-        throws Exception{
-        Objects.requireNonNull(util.getUsername());
-        Objects.requireNonNull(util.getPassword());
-        Objects.requireNonNull(util.getRole());
-        Utilisateur user = utilisateur.findByNameAndPasswordAndRole(util.getUsername(), util.getPassword(), util.getRole());
-        return user;
-    }*/
+   @PostMapping(value = "/login")
+    public Optional<Utilisateur> loginUtilisateur(@RequestBody Utilisateur util){
+        String name = util.getUsername();
+        Optional<Utilisateur> user = utilisateurService.findByUsername(name);
+        if(user.isPresent()){
+            return user;
+        }else{
+            return null;
+        }
+    }
     
     @PutMapping(value = "/id")
-    public Utilisateur updatePassword(@PathParam("id") long id, String password, String newPassword){
+    public Utilisateur updatePassword(@PathParam("id") Long id, String password, String newPassword){
         return utilisateurService.editPassword(password, newPassword, id);
     }
     
@@ -62,12 +62,12 @@ public class UtilisateurController {
     }
 
     @PutMapping(value = "/{id}")
-    public Utilisateur updateUtilisateur(Utilisateur util, @PathVariable("id") long idUtilisateur){
+    public Utilisateur updateUtilisateur(Utilisateur util, @PathVariable("id") Long idUtilisateur){
         return utilisateurService.editUtilisateur(util, idUtilisateur);
     }
     
     @DeleteMapping(value = "/{id}")
-    public void dropUtilisateurById(@PathVariable("idUtilisateur") long idUtilisateur){
+    public void dropUtilisateurById(@PathVariable("idUtilisateur") Long idUtilisateur){
         utilisateurService.deleteById(idUtilisateur);
     }
 }

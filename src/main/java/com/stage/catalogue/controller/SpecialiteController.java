@@ -35,7 +35,7 @@ public class SpecialiteController {
     }
     
     @GetMapping(value = "/{id}")
-    public Specialite getSpecialiteById(@PathVariable("id") long idSpecialite){
+    public Specialite getSpecialiteById(@PathVariable("id") Long idSpecialite){
         return specialiteService.getSpecialiteById(idSpecialite);
     }
     
@@ -45,12 +45,12 @@ public class SpecialiteController {
     }
     
     @PutMapping(value = "/{id}")
-    public Specialite updateSpecialite(@RequestBody Specialite special, @PathVariable("id") long idSpecialite){
+    public Specialite updateSpecialite(@RequestBody Specialite special, @PathVariable("id") Long idSpecialite){
         return specialiteService.editSpecialite(special);
     }
     
     @DeleteMapping(value = "/{id}")
-    public void deleteSpecialiteById(@PathVariable("id") long idSpecialite){
+    public void deleteSpecialiteById(@PathVariable("id") Long idSpecialite){
         specialiteService.deleteSpecialiteById(idSpecialite);
     }
 }

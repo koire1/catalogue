@@ -6,5 +6,5 @@ package com.stage.catalogue.entity;
  */
 // C'est seulement les deux langues????
 public enum Langue {
-FRANCAIS, ANGLAIS    
+FRANCAIS, ANGLAIS, ESPAGNOLE, ALLEMAND    
 }

@@ -1,6 +1,7 @@
 package com.stage.catalogue.dao;
 
 import com.stage.catalogue.entity.Auteur;
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,4 +15,5 @@ import org.springframework.stereotype.Repository;
 public interface AuteurDao extends JpaRepository<Auteur, Long> {
 
     public Page<Auteur> findByNom(String nomAuteur, Pageable pageable);
+    public Optional<Auteur> findAuteurByNomAuteur(String nomAuteur);
 }

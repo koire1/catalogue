@@ -46,7 +46,7 @@ public class EtudiantService {
         return null;
     }
 
-    public void dropEtudiantById(long idEtudiant) {
+    public void dropEtudiantById(Long idEtudiant) {
         etudiantDao.deleteById(idEtudiant);
     }
 }

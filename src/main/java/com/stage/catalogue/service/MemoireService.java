@@ -51,17 +51,15 @@ public class MemoireService {
             existingMemoire.setDiplome(memoire.getDiplome());
             existingMemoire.setDepartement(memoire.getDepartement());
             existingMemoire.setEtudiants(memoire.getEtudiants());
-            existingMemoire.setLienTelecharge(memoire.getLienTelecharge());
+            existingMemoire.setDetails(memoire.getDetails());
             existingMemoire.setMotsCles(memoire.getMotsCles());
-            existingMemoire.setNombreTelechargements(memoire.getNombreTelechargements());
-            existingMemoire.setNombreVues(memoire.getNombreVues());
             existingMemoire.setTitre(memoire.getTitre());
             return memoireDao.save(existingMemoire);
         }
         return null;
     }
 
-    public void dropMemoireById(long idMemoire) {
+    public void dropMemoireById(Long idMemoire) {
         memoireDao.deleteById(idMemoire);
     }
 }

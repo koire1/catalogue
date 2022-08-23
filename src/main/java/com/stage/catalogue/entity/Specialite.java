@@ -11,10 +11,10 @@ import lombok.Data;
  */
 @Entity
 @Data
-@Table(name = "specialite",
+/*@Table(name = "specialite",
         uniqueConstraints = {
             @UniqueConstraint(columnNames = {"code", "departement_id"})
-        })
+        })*/
 public class Specialite implements Serializable {
 
     @Id

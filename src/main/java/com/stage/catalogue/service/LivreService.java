@@ -2,8 +2,11 @@ package com.stage.catalogue.service;
 
 import com.stage.catalogue.dao.LivreDao;
 import com.stage.catalogue.entity.Langue;
+import com.stage.catalogue.entity.Auteur;
+import com.stage.catalogue.entity.Categorie;
 import com.stage.catalogue.entity.Livre;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -76,15 +79,25 @@ public class LivreService {
         return null;
     }
     
-    public Page<Livre> getByNomAuteur(String nomAuteur, int page, int size){
-        return livreDao.findByNomAuteur(nomAuteur, PageRequest.of(page, size));
+    public List<Auteur> getAuteurs(Long id){
+        Optional<Livre> oLivre = livreDao.findById(id);
+        if(oLivre.isPresent()){
+            return oLivre.get().getAuteurs();
+        }else{
+            return null;
+        }
     }
     
-    public Page<Livre> getByNomCategorie(String nomCategorie, int page, int size){
-        return livreDao.findByNomCategorie(nomCategorie, PageRequest.of(page, size));
+    public Categorie getCategorie(Long id){
+        Optional<Livre> oLivre = livreDao.findById(id);
+        if(oLivre.isPresent()){
+            return oLivre.get().getCategorie();
+        }else{
+            return null;
+        }
     }
 
-    public void dropLivreById(long idLivre) {
+    public void dropLivreById(Long idLivre) {
         livreDao.deleteById(idLivre);
     }
 }

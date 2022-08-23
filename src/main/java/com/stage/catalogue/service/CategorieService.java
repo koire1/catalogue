@@ -2,6 +2,7 @@ package com.stage.catalogue.service;
 
 import com.stage.catalogue.dao.CategorieDao;
 import com.stage.catalogue.entity.Categorie;
+import com.stage.catalogue.entity.Livre;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class CategorieService {
         return categorieDao.findByNomLike(nomCategorie, PageRequest.of(page, size));
     }
 
-    public Categorie getCategorieById(long idCategorie) {
+    public Categorie getCategorieById(Long idCategorie) {
         return categorieDao.findById(idCategorie).orElse(null);
     }
 
@@ -45,7 +46,17 @@ public class CategorieService {
         return null;
     }
 
-    public void dropCategorieById(long idCategorie) {
+    public void dropCategorieById(Long idCategorie) {
         categorieDao.deleteById(idCategorie);
+    }
+    
+    public List<Livre> getLivres(String nomCategorie){
+        Optional<Categorie> oCategorie = categorieDao.findByNom(nomCategorie);
+        
+        if(oCategorie.isPresent()){
+            return oCategorie.get().getLivres();
+        }else{
+            return null;
+        }
     }
 }

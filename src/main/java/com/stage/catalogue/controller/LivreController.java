@@ -1,13 +1,13 @@
 package com.stage.catalogue.controller;
 
 import com.stage.catalogue.entity.Langue;
-import com.stage.catalogue.entity.Livre;
 import com.stage.catalogue.entity.Auteur;
 import com.stage.catalogue.entity.Categorie;
+import com.stage.catalogue.entity.Livre;
 import com.stage.catalogue.service.LivreService;
 import java.sql.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +30,7 @@ public class LivreController {
     @Autowired
     private LivreService livreService;
     
-    @PostMapping()
+    @PostMapping
     public Livre addLivre(@RequestBody Livre liv){
         return livreService.addLivre(liv);
     }
@@ -70,28 +70,28 @@ public class LivreController {
         return livreService.getLivreByLangue(langue, page, size);
     }
     
-    @GetMapping(value = "/{nomauteur}")
-    public Page<Livre> getByNomAuteur(@PathVariable("nomAuteur") String nomAuteur, @RequestParam(value = "page" , defaultValue = "0") int page, @RequestParam(value = "size" , defaultValue = "10") int size){
-        return livreService.getByNomAuteur(nomAuteur, page, size);
+   @GetMapping(value = "/{id}/auteurs")
+    public List<Auteur> getAuteurs(@PathVariable("id") Long id){
+        return livreService.getAuteurs(id);
     }
     
-    @GetMapping(value = "/{nomCategorie}")
-    public Page<Livre> getByNomCategorie(@PathVariable("nomCategorie") String nomCategorie, @RequestParam(value = "page" , defaultValue = "0") int page, @RequestParam(value = "size" , defaultValue = "10") int size){
-        return livreService.getByNomCategorie(nomCategorie, page, size);
+    @GetMapping(value = "/{id}/categorie")
+    public Categorie getCategorie(@PathVariable("id") Long id){
+        return livreService.getCategorie(id);
     }
     
-    @GetMapping()
+    @GetMapping
     public Page<Livre> getAllLivre(@RequestParam(value = "page" , defaultValue = "0") int page, @RequestParam(value = "size" , defaultValue = "10") int size){
         return livreService.findAll(page, size);
     }
     
     @PutMapping(value = "/{id}")
-    public Livre updateLivreById(Livre liv, @PathVariable("idLivre") long idLivre){
+    public Livre updateLivreById(Livre liv, @PathVariable("idLivre") Long idLivre){
         return livreService.editLivreById(liv);
     }
     
     @DeleteMapping(value = "/{id}")
-    public void dropLivreById(@PathVariable("idLivre") long idLivre){
+    public void dropLivreById(@PathVariable("idLivre") Long idLivre){
         livreService.dropLivreById(idLivre);
     }
 }

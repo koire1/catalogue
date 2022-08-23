@@ -14,7 +14,7 @@ import lombok.Data;
  */
 @Entity
 @Data
-@Table(name = "memoire")
+//@Table(name = "memoire")
 public class Memoire implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,15 +39,9 @@ public class Memoire implements Serializable{
     @JoinColumn(name = "diplome_id")
     private Diplome diplome;
 
-    // TODO Il faut deplacer les trois proprietes suivantes vers une autre classe
-    @Column(name = "lientelecharge", nullable = false)
-    private String lienTelecharge;
-    
-    @Column(name = "nbretelechargememoire")
-    private int nombreTelechargements;
-    
-    @Column(name="nbrevuememoire")
-    private int nombreVues;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "details_id")
+    private Details details;
     
     @ManyToOne(optional = false)
     @JoinColumn(name = "departement_id", nullable = false)

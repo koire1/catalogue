@@ -7,7 +7,6 @@ import com.stage.catalogue.service.SpecialiteService;
 import java.util.List;
 import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,34 +37,34 @@ public class DepartementController {
         return departementService.addDepartement(depart);
     }
     @GetMapping(value = "/{nomdepart}")
-    public Page<Departement> getDepartementByNom(@PathVariable("nomdepart") String nomDepart, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
+    public Page<Departement> getDepartementByNom(@PathVariable("nomdepart") String nomDepart, @RequestParam(value = "page" , defaultValue = "0") int page, @RequestParam(value = "size" , defaultValue = "0") int size){
         return departementService.getDepartementByNom(nomDepart, page, size);
     }
     
     @GetMapping(value = "/{id}")
-    public Departement getDepartementById(@PathVariable("id") long idDepart){
+    public Departement getDepartementById(@PathVariable("id") Long idDepart){
         return departementService.getDepartementById(idDepart);
     }
     
     @GetMapping(value = "/{id}/specialites")
-    public List<Specialite> listSpecialite(@PathVariable("id") long idDepart){
+    public List<Specialite> listSpecialite(@PathVariable("id") Long idDepart){
         return departementService.getSpecialite(idDepart);
     }
     
     @PutMapping(value = "/{idDepart}/specialite/{idSpecial}")
-    public Specialite modifSpecialite(@PathVariable("idDepart") long idDepart, @PathVariable("idSpecial") long id, @RequestBody Specialite special){
+    public Specialite modifSpecialite(@PathVariable("idDepart") Long idDepart, @PathVariable("idSpecial") long id, @RequestBody Specialite special){
         return speciateService.editSpecialite(special);
     }
     
     @PostMapping(value = "/{idDepart}/specialite")
-    public Specialite ajoutSpecialite(@PathVariable("idDepart") int idDepart, @RequestBody Specialite special){
+    public Specialite ajoutSpecialite(@PathVariable("idDepart") Long idDepart, @RequestBody Specialite special){
         Departement d = departementService.getDepartementById(idDepart);
         special.setDepartement(d);
         return speciateService.addSpecialite(special);
     }
     
     @DeleteMapping(value = "/{id}/specialite/{idSpecial}")
-    public void suppSpecialite(@PathVariable("id") long idDepart, @PathParam("idSpecial") long idSpecial){
+    public void suppSpecialite(@PathVariable("id") Long idDepart, @PathParam("idSpecial") Long idSpecial){
         speciateService.deleteSpecialiteById(idSpecial);
     }
     
@@ -75,12 +74,12 @@ public class DepartementController {
     }
     
     @PutMapping("/{id}")
-    public Departement updateDepartementById(Departement depart, @PathVariable("id") long idDepart){
+    public Departement updateDepartementById(Departement depart, @PathVariable("id") Long idDepart){
         return departementService.editDepartement(depart);
     }
     
     @DeleteMapping(value = "/{id}")
-    public void dropDepartementById(@PathVariable("id") int idDepart){
+    public void dropDepartementById(@PathVariable("id") Long idDepart){
         departementService.dropDepartementById(idDepart);
     }
 }

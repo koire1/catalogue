@@ -4,7 +4,6 @@ import com.stage.catalogue.entity.Etudiant;
 import com.stage.catalogue.service.EtudiantService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +26,7 @@ public class EtudiantController {
     @Autowired
     private EtudiantService etudiantService;
     
-    @PostMapping()
+    @PostMapping
     public Etudiant addEtudiant(@RequestBody Etudiant etud){
         return etudiantService.addEtudiant(etud);
     }
@@ -38,22 +37,22 @@ public class EtudiantController {
     }
     
     @GetMapping(value = "/{nometudiant}")
-    public Page<Etudiant> getEtudiantByNomEtudiant(@PathVariable("nometudiant") String nomEtudiant, @DefaultValue("0") @RequestParam("page") int page, @DefaultValue("10") @RequestParam("size") int size){
+    public Page<Etudiant> getEtudiantByNomEtudiant(@PathVariable("nometudiant") String nomEtudiant, @RequestParam(value = "page" , defaultValue = "0") int page, @RequestParam(value = "size" , defaultValue = "0") int size){
         return etudiantService.getEtudiantByNom(nomEtudiant, page, size);
     }
    
-    @GetMapping()
+    @GetMapping
     public List<Etudiant> getAll(){
         return etudiantService.getAll();
     }
     
     @PutMapping(value = "/{id}")
-    public Etudiant updateEtudiant(Etudiant etud, @PathVariable("id") long idEtudiant){
+    public Etudiant updateEtudiant(Etudiant etud, @PathVariable("id") Long idEtudiant){
         return etudiantService.editEtudiantById(etud);
     }
     
     @DeleteMapping(value = "/{id}")
-    public void dropEtudiantById(@PathVariable("id") long idEtudiant){
+    public void dropEtudiantById(@PathVariable("id") Long idEtudiant){
         etudiantService.dropEtudiantById(idEtudiant);
     }
 }

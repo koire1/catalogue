@@ -34,7 +34,7 @@ public class DiplomeController {
     }
     
     @PutMapping("/{id}")
-    public Diplome edit(@PathVariable("id") long id, @RequestBody Diplome diplome){
+    public Diplome edit(@PathVariable("id") Long id, @RequestBody Diplome diplome){
         Optional<Diplome> oDiplome = diplomeService.findById(id);
         if(oDiplome.isPresent()){
             Diplome d = oDiplome.get();
@@ -46,7 +46,7 @@ public class DiplomeController {
     }
     
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") long id){
+    public void delete(@PathVariable("id") Long id){
         diplomeService.delete(id);
     }
     
@@ -57,7 +57,7 @@ public class DiplomeController {
     } 
     
     @GetMapping("/{id}")
-    public ResponseEntity<Diplome> findOne(@PathVariable("id") long id){
+    public ResponseEntity<Diplome> findOne(@PathVariable("id") Long id){
         Optional<Diplome> d = diplomeService.findById(id);
         if(d.isPresent()){
             return ResponseEntity.ok(d.get());
