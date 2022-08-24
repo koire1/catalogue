@@ -1,7 +1,7 @@
 package com.stage.catalogue.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,7 +13,7 @@ import lombok.Data;
  */
 @Entity
 @Data
-/*@Table(name = "livre",
+@Table(name = "livre")/*,
         uniqueConstraints = {
             @UniqueConstraint(columnNames = {"isbn", "categorie_id"})
         })*/
@@ -32,7 +32,6 @@ public class Livre implements Serializable{
     private int nombrePages;
     
     @Column(nullable = false, name = "annee_publication")
-    @Temporal(javax.persistence.TemporalType.DATE)
     private Date anneePublication;
     
     @Column(name = "langue", nullable = false)
@@ -49,7 +48,7 @@ public class Livre implements Serializable{
     
     @Transient
     @Column(nullable = false, length = 1024*1024*30)
-    byte[] image;
+    private byte[] image;
     
     @ManyToMany
     @JoinTable(name = "livre_auteur",

@@ -30,8 +30,8 @@ public class UtilisateurController {
         return utilisateurService.addUtilisateur(util);
     }
     
-    @GetMapping()
-    public Optional<Utilisateur> getUtilisateurByName(@PathParam("name") String name){
+    @GetMapping(value = "/{name}")
+    public Optional<Utilisateur> getUtilisateurByName(@PathVariable("name") String name){
         return utilisateurService.getUtilisateurByUsername(name);
     }
     
@@ -51,8 +51,8 @@ public class UtilisateurController {
         }
     }
     
-    @PutMapping(value = "/id")
-    public Utilisateur updatePassword(@PathParam("id") Long id, String password, String newPassword){
+    @PutMapping(value = "/password/{id}")
+    public Utilisateur updatePassword(@PathVariable("id") Long id, String password, String newPassword){
         return utilisateurService.editPassword(password, newPassword, id);
     }
     

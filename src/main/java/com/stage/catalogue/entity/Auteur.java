@@ -14,7 +14,7 @@ import lombok.Data;
  */
 @Entity
 @Data
-//@Table(name = "auteur")
+@Table(name = "auteur")
 public class Auteur implements Serializable{
     
     @Id
@@ -24,7 +24,7 @@ public class Auteur implements Serializable{
     
     @NotNull
     @Column(name = "nom", nullable = false)
-    private String nom;
+    private String nomAuteur;
     
     @JsonIgnore
     @XmlTransient

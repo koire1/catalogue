@@ -14,7 +14,7 @@ import lombok.Data;
  */
 @Entity
 @Data
-//@Table(name = "departement")
+@Table(name = "departement")
 public class Departement implements Serializable{
     
     @Id
@@ -33,5 +33,10 @@ public class Departement implements Serializable{
     @XmlTransient
     @OneToMany(mappedBy = "departement")
     private List<Specialite> specialites;
+    
+    @JsonIgnore
+    @XmlTransient
+    @OneToMany(mappedBy = "departement")
+    private List<Memoire> memoires;
     
 }

@@ -41,7 +41,6 @@ public class UtilisateurService{
         
         if (oUtilisateur.isPresent()) {
             Utilisateur existingUtilisateur = oUtilisateur.get();
-            existingUtilisateur.setName(utilisateur.getName());
             existingUtilisateur.setEmail(utilisateur.getEmail());
             existingUtilisateur.setRole(utilisateur.getRole());
             existingUtilisateur.setUsername(utilisateur.getUsername());

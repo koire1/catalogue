@@ -21,8 +21,8 @@ public class CatalogueApplication extends SpringBootServletInitializer {
     CommandLineRunner run(UtilisateurService utilisateurService) {
         return a -> {
             if (utilisateurService.getAll().isEmpty()) {
-                utilisateurService.addUtilisateur(new Utilisateur(null, "admin", "admin123", Role.ADMIN, "Admin", "admin@example.com", true, false));
-                utilisateurService.addUtilisateur(new Utilisateur(null, "user", "admin123", Role.USER, "User", "user@example.com", true, false));
+                utilisateurService.addUtilisateur(new Utilisateur(null, "admin", "admin123", Role.ADMIN, "admin@example.com", true, false));
+                utilisateurService.addUtilisateur(new Utilisateur(null, "user", "admin123", Role.USER, "user@example.com", true, false));
             }
         };
     }

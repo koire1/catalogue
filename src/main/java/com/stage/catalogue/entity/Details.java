@@ -4,8 +4,11 @@
  */
 package com.stage.catalogue.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 import lombok.Data;
 
 /**
@@ -14,7 +17,7 @@ import lombok.Data;
  */
 @Entity
 @Data
-//@Table(name = "details")
+@Table(name = "details")
 public class Details implements Serializable{
     
     @Id
@@ -31,5 +34,10 @@ public class Details implements Serializable{
     
     @Column(name="nbrevuememoire")
     private int nombreVues;
+    
+    @JsonIgnore
+    @XmlTransient
+    @OneToMany(mappedBy = "details")
+    private List<Memoire> memoires;
     
 }

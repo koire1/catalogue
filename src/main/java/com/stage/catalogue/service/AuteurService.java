@@ -33,14 +33,14 @@ public class AuteurService {
     }
 
     public Page<Auteur> getAuteurByNom(String nomAuteur, int page, int size) {
-        return auteurDao.findByNom(nomAuteur, PageRequest.of(page, size));
+        return auteurDao.findByNomAuteur(nomAuteur, PageRequest.of(page, size));
     }
 
     public Auteur editAuteur(Auteur auteur) {
         Optional<Auteur> oAuteur = auteurDao.findById(auteur.getId());
         if (oAuteur.isPresent()) {
             Auteur existingAuteur = oAuteur.get();
-            existingAuteur.setNom(auteur.getNom());
+            existingAuteur.setNomAuteur(auteur.getNomAuteur());
             return auteurDao.save(existingAuteur);
         }
         return null;

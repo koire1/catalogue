@@ -1,7 +1,7 @@
 package com.stage.catalogue.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,7 +14,7 @@ import lombok.Data;
  */
 @Entity
 @Data
-//@Table(name = "memoire")
+@Table(name = "memoire")
 public class Memoire implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,6 @@ public class Memoire implements Serializable{
     @NotNull
     @PastOrPresent
     @Column(nullable = false, name = "annee")
-    @Temporal(javax.persistence.TemporalType.DATE)
     private Date annee;
     
     @NotNull

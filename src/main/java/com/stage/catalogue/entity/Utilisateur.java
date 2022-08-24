@@ -39,10 +39,6 @@ public class Utilisateur implements Serializable{
     @Column(name = "role", nullable = false)
     private Role role;
     
-    @NotNull
-    @Column(name = "nom", nullable = false)
-    private String name;
-    
     @Email
     @NotNull
     @Column(name = "email", nullable = false, unique = true)

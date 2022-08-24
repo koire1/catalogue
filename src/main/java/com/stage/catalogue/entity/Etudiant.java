@@ -13,7 +13,7 @@ import lombok.Data;
  */
 @Entity
 @Data
-//@Table(name = "etudiant")
+@Table(name = "etudiant")
 public class Etudiant implements Serializable{
     
     @Id

@@ -17,7 +17,6 @@ public class CustomUserDetails extends Utilisateur implements UserDetails{
         setEnabled(utilisateur.isEnabled());
         setId(utilisateur.getId());
         setLocked(utilisateur.isLocked());
-        setName(utilisateur.getName());
         setPassword(utilisateur.getPassword());
         setRole(utilisateur.getRole());
         setUsername(utilisateur.getUsername());
